@@ -11,5 +11,12 @@ angular.module('starter.controllers', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('ParamsCtrl', function($scope) {
+        $scope.test = 'test 123';
+})
+
+.controller('SearchCtrl', function($scope) {
+})
+
+.controller('CinemaCtrl', function($scope) {
 });
