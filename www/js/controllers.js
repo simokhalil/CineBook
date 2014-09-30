@@ -1,6 +1,15 @@
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {
+        angular.module('ionicApp', ['ionic'])
+
+            .controller('MainCtrl', ['$scope', function($scope) {
+                $scope.data = {
+                    isLoading: false
+                };
+
+
+        }]);
 })
 
 .controller('LoginCtrl', function($scope) {
