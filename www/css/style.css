@@ -1,6 +1,13 @@
 /* Empty. Add your own CSS if you like */
-.wide-as-needed {
-    overflow: scroll;
+.wide-as-needed-horizontal {
+
+    /*overflow: scroll;*/
+    white-space: nowrap;
+}
+
+.wide-as-needed-vertical {
+
+    /*overflow: scroll;*/
     white-space: nowrap;
 }
 .scroll {
