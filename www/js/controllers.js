@@ -13,10 +13,10 @@ angular.module('starter.controllers', [])
 
     Films.get({id:16}, function(data){
         var json = angular.fromJson(data);
-        console.log("json = " + data);
+        console.log("json = " + angular.toJson(data));
         var imgs = angular.fromJson(json.results);
         $scope.imgs = imgs;
-        console.log("imgs = " +$scope.imgs);
+        console.log("imgs = " +imgs);
     });
 
 
