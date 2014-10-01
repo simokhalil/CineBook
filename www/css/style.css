@@ -61,3 +61,12 @@
     padding: 0px;
     border-width: 0px;
 }
+
+.scroll-vertical{
+    height: 200px;
+    bottom: 0px;
+}
+
+.item{
+    background-color: transparent;
+}

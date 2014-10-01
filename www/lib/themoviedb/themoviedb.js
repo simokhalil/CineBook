@@ -1,7 +1,7 @@
 var theMovieDb = {};
 
 theMovieDb.common = {
-    api_key: "",
+    api_key: "149afb8797c85940697c2759d764a2c7",
     base_uri: "http://api.themoviedb.org/3/",
     images_uri: "http://image.tmdb.org/t/p/",
     timeout: 5000,
