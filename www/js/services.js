@@ -1,4 +1,8 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['ngResource'])
+
+.factory("Films", function($resource) {
+    return $resource("http://api.themoviedb.org/3/genre/:id/movies?api_key=149afb8797c85940697c2759d764a2c7");
+})
 
 /**
  * A simple example service that returns some data.

@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
-    theMovieDb.genres.getMovies({"id": 16}, function(data){
+.controller('DashCtrl', function($scope, Films) {
+    /*theMovieDb.genres.getMovies({"id": "16"}, function(data){
         var json = angular.fromJson(data);
         console.log("json = " + data);
         var imgs = angular.fromJson(json.results);
@@ -9,6 +9,14 @@ angular.module('starter.controllers', [])
         console.log("imgs = " +$scope.imgs);
     }, function(data){
         console.log("error");
+    });*/
+
+    Films.get({id:16}, function(data){
+        var json = angular.fromJson(data);
+        console.log("json = " + data);
+        var imgs = angular.fromJson(json.results);
+        $scope.imgs = imgs;
+        console.log("imgs = " +$scope.imgs);
     });
 
 
