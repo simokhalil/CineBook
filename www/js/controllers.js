@@ -1,5 +1,7 @@
 angular.module('starter.controllers', [])
 
+
+
 .controller('DashCtrl', function($scope, Films) {
     /*theMovieDb.genres.getMovies({"id": "16"}, function(data){
         var json = angular.fromJson(data);
@@ -27,7 +29,26 @@ angular.module('starter.controllers', [])
     $scope.actus = actus;
 })
 
-.controller('LoginCtrl', function($scope) {
+.controller('SignInCtrl', function($scope, $state) {
+        $scope.fbLogin = function() {
+            openFB.login(
+                function(response) {
+                    if (response.status === 'connected') {
+                        console.log('Facebook login succeeded');
+                        $scope.closeLogin();
+                        $state.go('tab.dash');
+                    } else {
+                        alert('Facebook login failed');
+                    }
+                },
+                {scope: 'email,publish_actions'});
+        };
+
+        $scope.doLogin = function(loginData){
+            console.log("user : " + loginData.username);
+            console.log("pass : " + loginData.password);
+            $state.go('tab.dash');
+        };
 })
 
 .controller('FriendsCtrl', function($scope, Friends) {
@@ -47,3 +68,5 @@ angular.module('starter.controllers', [])
 
 .controller('CinemaCtrl', function($scope) {
 });
+
+

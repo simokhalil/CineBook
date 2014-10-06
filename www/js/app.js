@@ -23,11 +23,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
+    openFB.init({appId: '314876622033222'});
+
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
+
+      .state('signin', {
+          url: '/sign-in',
+          templateUrl: 'templates/login.html',
+          controller: 'SignInCtrl'
+      })
 
     // setup an abstract state for the tabs directive
     .state('tab', {
@@ -98,7 +106,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/sign-in');
 
 });
 
