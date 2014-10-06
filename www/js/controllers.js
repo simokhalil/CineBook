@@ -35,7 +35,6 @@ angular.module('starter.controllers', [])
                 function(response) {
                     if (response.status === 'connected') {
                         console.log('Facebook login succeeded');
-                        $scope.closeLogin();
                         $state.go('tab.dash');
                     } else {
                         alert('Facebook login failed');
