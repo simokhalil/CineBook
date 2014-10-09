@@ -50,6 +50,17 @@ angular.module('starter.controllers', [])
         };
 })
 
+.controller('DetailFilmCtrl', function($scope,$stateParams,detailFilm){
+
+detailFilm.get($stateParams, function (data) {
+    var json = angular.fromJson(data);
+    console.log("json= "+ data);
+    $scope.data= json;
+    $state.go('tab.dash');
+})
+
+})
+
 .controller('FriendsCtrl', function($scope, Friends) {
   $scope.friends = Friends.all();
 })

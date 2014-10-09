@@ -3,7 +3,7 @@
       <!--<div style="position: fixed">-->
         <h2>Derniers films</h2>
               <ion-scroll direction="x" class="wide-as-needed-horizontal" >
-                  <a ng-repeat="img in imgs" class="button inline-button img-button"><img src="http://image.tmdb.org/t/p/w92/{{img.poster_path}}" style="height:150px;"> </a>
+                  <a href="#/detailFilm/{{img.id}}" ng-repeat="img in imgs" class="button inline-button img-button"><img src="http://image.tmdb.org/t/p/w92/{{img.poster_path}}" style="height:150px;"> </a>
               </ion-scroll>
           <hr/>
       <!--</div>-->

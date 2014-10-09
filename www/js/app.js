@@ -36,6 +36,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           templateUrl: 'templates/login.html',
           controller: 'SignInCtrl'
       })
+      .state('detailFilm', {
+          url: '/detailFilm/:idFilm',
+          templateUrl: "templates/detailFilm.html",
+          controller: 'DetailFilmCtrl'
+
+
+      })
 
     // setup an abstract state for the tabs directive
     .state('tab', {
@@ -43,6 +50,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       abstract: true,
       templateUrl: "templates/tabs.html"
     })
+
 
     // Each tab has its own nav history stack:
 
@@ -75,6 +83,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
+
       .state('tab.cinema', {
           url: '/cinema',
           views: {
@@ -105,8 +114,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     });
 
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/sign-in');
+  $urlRouterProvider.otherwise('/detailFilm');
 
 });
 
