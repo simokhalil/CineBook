@@ -70,3 +70,7 @@
 .item{
     background-color: transparent;
 }
+
+.bar.bar-stable .title {
+    color: #fff;
+}
