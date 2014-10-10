@@ -19,6 +19,10 @@ angular.module('starter.controllers', [])
         var imgs = angular.fromJson(json.results);
         $scope.imgs = imgs;
         console.log("imgs = " +imgs);
+
+        $scope.goDetailFilm = function(filmData){
+            $state.go('film.detail');
+        }
     });
 
 
