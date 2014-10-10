@@ -12,7 +12,11 @@
 }
 .scroll {
     min-width: 100%;
+    height:100% !important
 }
+
+
+
 .bar.bar-loading {
     display: block;
     height: 24px;
@@ -63,7 +67,7 @@
 }
 
 .scroll-vertical{
-    height: 250px;
+    height: 50% !important;
     bottom: 0px;
 }
 
