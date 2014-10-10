@@ -3,10 +3,14 @@
 
         <img src="http://image.tmdb.org/t/p/w500/{{data.backdrop_path}}" style="width:100%; ">
         <h3>Description du film</h3>
-        <img src="http://image.tmdb.org/t/p/w500/{{data.poster_path}}" style="width:100px; ">
+        <img src="http://image.tmdb.org/t/p/w500/{{data.poster_path}}" style="width:100px;float: left; ">
         <div>
             Genres : {{genres}} <br>
-            Date de sortie : {{releaseDate}} <br>
+            Date de sortie : {{release_date}} <br>
+        </div>
+        <h3>Synopsis</h3>
+        <div>
+            {{data.overview}}
         </div>
         <div>
             <object type="application/x-shockwave-flash" width="425" height="355" data="http://www.youtube.com/v/{{video.key}}">

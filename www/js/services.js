@@ -7,7 +7,7 @@ angular.module('starter.services', ['ngResource'])
 
 
     .factory("detailFilm", function($resource) {
-        return $resource("http://api.themoviedb.org/3/movie/:idFilm?api_key=149afb8797c85940697c2759d764a2c7");
+        return $resource("http://api.themoviedb.org/3/movie/:idFilm?api_key=149afb8797c85940697c2759d764a2c7&language=fr");
     })
     .factory("videoFilm", function($resource){
         return $resource("http://api.themoviedb.org/3/movie/:idFilm/videos?api_key=149afb8797c85940697c2759d764a2c7")

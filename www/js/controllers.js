@@ -74,10 +74,12 @@ detailFilm.get($stateParams, function (data) {
         }
     }
     /************* Date de sortie *******************/
-    /*$scope.releaseDate = angular.fromJson(json.release_date);
-    var arrayDate = $scope.releaseDate.split('-');
-    console.log($scope.releaseDate);
-    $scope.releaseDate = arrayDate[2]+"/"+arrayDate[1]+"/"+arrayDate[0];*/
+    var releaseDate = angular.fromJson(json).release_date;
+    var arrayDate = releaseDate.split('-');
+    //console.log(releaseDate);
+    releaseDate = arrayDate[2]+"/"+arrayDate[1]+"/"+arrayDate[0];
+    //console.log(releaseDate);
+    $scope.release_date = releaseDate;
 
 })
 videoFilm.get($stateParams, function (data) {
