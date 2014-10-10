@@ -60,7 +60,25 @@ detailFilm.get($stateParams, function (data) {
     var json = angular.fromJson(data);
     console.log("json= "+ data);
     $scope.data= json;
-    $state.go('tab.dash');
+
+    /************** Genres ****************/
+    var genres = angular.fromJson(json.genres);
+    console.log(json.genres.length);
+    $scope.genres ="";
+    for(var i=0; i<json.genres.length; i++){
+        console.log("genre :" + genres[i].name);
+        $scope.genres+= genres[i].name;
+
+        if(i != json.genres.length-1){
+            $scope.genres +=", "
+        }
+    }
+    /************* Date de sortie *******************/
+    /*$scope.releaseDate = angular.fromJson(json.release_date);
+    var arrayDate = $scope.releaseDate.split('-');
+    console.log($scope.releaseDate);
+    $scope.releaseDate = arrayDate[2]+"/"+arrayDate[1]+"/"+arrayDate[0];*/
+
 })
 videoFilm.get($stateParams, function (data) {
     var json = angular.fromJson(data);
