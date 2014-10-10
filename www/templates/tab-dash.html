@@ -1,14 +1,21 @@
 <ion-view title="Accueil">
   <ion-content class="padding">
       <!--<div style="position: fixed">-->
-        <h2>Derniers films</h2>
-              <ion-scroll direction="x" class="wide-as-needed-horizontal" >
-                  <a href="#/detailFilm/{{img.id}}" ng-repeat="img in imgs" class="button inline-button img-button"><img src="http://image.tmdb.org/t/p/w92/{{img.poster_path}}" style="height:150px;"> </a>
+        <h4>Derniers films</h4>
+              <ion-scroll direction="x" scrollbar-x="false" class="wide-as-needed-horizontal" >
+                  <a href="#/detailFilm/{{img.id}}" ng-repeat="img in imgs" class="button inline-button img-button film-list-item">
+                      <img src="http://image.tmdb.org/t/p/w92/{{img.poster_path}}" class="film-list-item-image">
+                      <div class="film-list-item-details">
+                          {{img.original_title}} <br/>
+                          Note : {{img.vote_average}}/10
+                          <span class="paragraph-end"></span>
+                      </div>
+                  </a>
               </ion-scroll>
           <hr/>
       <!--</div>-->
 
-      <h2>Actualités</h2>
+      <h4>Actualités</h4>
 
       <ion-scroll direction="y" class="scroll-vertical">
           <div ng-repeat="actu in actus" class="list card">
@@ -21,23 +28,6 @@
                   <p>{{actu.title}}</p>
               </div>
           </div>
-
-              <a class="button inline-button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
-              <a class="button img-button"><img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg" style="width:80px;"> </a><br/>
       </ion-scroll>
 
 

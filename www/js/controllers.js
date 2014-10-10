@@ -20,9 +20,9 @@ angular.module('starter.controllers', [])
         $scope.imgs = imgs;
         console.log("imgs = " +imgs);
 
-        $scope.goDetailFilm = function(filmData){
+        /*$scope.goDetailFilm = function(filmData){
             $state.go('film.detail');
-        }
+        }*/
     });
 
 
