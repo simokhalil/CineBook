@@ -54,7 +54,7 @@ angular.module('starter.controllers', [])
         };
 })
 
-.controller('DetailFilmCtrl', function($scope,$stateParams,detailFilm){
+.controller('DetailFilmCtrl', function($scope,$stateParams,detailFilm,videoFilm){
 
 detailFilm.get($stateParams, function (data) {
     var json = angular.fromJson(data);
@@ -62,6 +62,11 @@ detailFilm.get($stateParams, function (data) {
     $scope.data= json;
     $state.go('tab.dash');
 })
+videoFilm.get($stateParams, function (data) {
+    var json = angular.fromJson(data);
+    $scope.video=angular.fromJson(json.results[0]);
+})
+
 
 })
 
