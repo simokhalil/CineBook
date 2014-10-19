@@ -144,3 +144,8 @@ ion-content{
 h4, .h4, h5, .h5, h6, .h6{
     margin-top: 0;
 }
+
+h3 {
+    background-color: #4a87ee;
+    color: #FFFFFF;
+}
