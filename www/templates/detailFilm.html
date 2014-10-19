@@ -4,18 +4,9 @@
 
         <img src="http://image.tmdb.org/t/p/w500/{{data.backdrop_path}}" style="width:100%;">
         <h3 style="margin-top: 0px; ">Description du film</h3>
-        <table>
-            <tr>
-                <td>
-                    <img src="http://image.tmdb.org/t/p/w500/{{data.poster_path}}" style="width:100px; ">
-                </td>
-                <td style="border: 1px; border-color: #000000">
-                        Genres : {{genres}} </br>
-                        Date de sortie : {{release_date}}
-
-                </td>
-            </tr>
-        </table>
+        <img src="http://image.tmdb.org/t/p/w500/{{data.poster_path}}" style="width:100px; float: left">
+        Genres : {{genres}} </br>
+        Date de sortie : {{release_date}}
 
 
         <h3 style="border-top: 50px">Synopsis</h3>
