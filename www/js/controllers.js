@@ -2,6 +2,7 @@ angular.module('starter.controllers', [])
 
 
 
+
 .controller('DashCtrl', function($scope, Films) {
     /*theMovieDb.genres.getMovies({"id": "16"}, function(data){
         var json = angular.fromJson(data);
