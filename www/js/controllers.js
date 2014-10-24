@@ -3,7 +3,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('DashCtrl', function($scope, Films) {
+.controller('DashCtrl', function($scope, Films, globalJson) {
     /*theMovieDb.genres.getMovies({"id": "16"}, function(data){
         var json = angular.fromJson(data);
         console.log("json = " + data);
@@ -26,6 +26,8 @@ angular.module('starter.controllers', [])
         }*/
     });
 
+        console.log("globalJson = " + angular.toJson(globalJson.get()));
+
     var actus = new Array();
 
     for(var i= 1; i<=10; i++){
@@ -34,7 +36,7 @@ angular.module('starter.controllers', [])
     $scope.actus = actus;
 })
 
-.controller('SignInCtrl', function($scope, $http, $state, Login) {
+.controller('SignInCtrl', function($scope, $http, $state, globalJson) {
         $scope.fbLogin = function() {
             openFB.login(
                 function(response) {
@@ -67,6 +69,7 @@ angular.module('starter.controllers', [])
                         }
                     }else{
                         console.log("login = " + user);
+                        globalJson.set(json);
                         $state.go('tab.dash');
                         $scope.showError= function() {
                             return true;

@@ -15,6 +15,18 @@ angular.module('starter.services', ['ngResource'])
         return $resource("http://api.themoviedb.org/3/movie/:idFilm/videos?api_key=149afb8797c85940697c2759d764a2c7")
     })
 
+    .factory('globalJson', function() {
+        var globalJson;
+
+        return {
+            get: function() {
+                return globalJson;
+            },
+            set: function(json) {
+                globalJson = json;
+            }
+        }
+    })
 
 /**
  * A simple example service that returns some data.
