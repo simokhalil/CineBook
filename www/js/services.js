@@ -1,20 +1,20 @@
 angular.module('starter.services', ['ngResource'])
 
-.factory("Films", function($resource) {
-    return $resource("http://api.themoviedb.org/3/genre/:id/movies?api_key=149afb8797c85940697c2759d764a2c7");
-})
-
-    .factory('Login', function($resource) {
-        return $resource('http://cinebook.dev/login');
+    .factory("Films", function($resource) {
+        return $resource("http://api.themoviedb.org/3/genre/:id/movies?api_key=149afb8797c85940697c2759d764a2c7");
     })
 
     .factory("detailFilm", function($resource) {
         return $resource("http://api.themoviedb.org/3/movie/:idFilm?api_key=149afb8797c85940697c2759d764a2c7&language=fr");
     })
+
     .factory("videoFilm", function($resource){
         return $resource("http://api.themoviedb.org/3/movie/:idFilm/videos?api_key=149afb8797c85940697c2759d764a2c7")
     })
 
+    /*
+    * Service pour stocker le JSON reçu du serveur lors de la connexion d'un user
+     */
     .factory('globalJson', function() {
         var globalJson;
 
@@ -24,6 +24,26 @@ angular.module('starter.services', ['ngResource'])
             },
             set: function(json) {
                 globalJson = json;
+            }
+        }
+    })
+
+    /*
+     * Service pour stocker le user connecté
+     * Cette variable est vidée en cas de déconnexion
+     */
+    .factory('globalUser', function() {
+        var globalUser = null;
+
+        return {
+            get: function() {
+                return globalUser;
+            },
+            set: function(user) {
+                globalUser = user;
+            },
+            unset: function(){
+                globalUser = null;
             }
         }
     })
