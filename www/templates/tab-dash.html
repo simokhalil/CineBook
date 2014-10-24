@@ -18,14 +18,14 @@
       <h4>Actualités</h4>
 
       <ion-scroll direction="y" class="scroll-vertical">
-          <div ng-repeat="actu in actus" class="list card">
+          <div ng-repeat="actu in globalJson.posts" class="list card">
               <div class="item item-avatar">
                   <img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg">
-                  <h2>{{actu.title}}</h2>
-                  <p>le 30 Septembre 2014 à 23:00</p>
+                  <h2>{{actu.email}}</h2>
+                  <p>{{actu.created_at}}</p>
               </div>
               <div class="item item-body">
-                  <p>{{actu.title}}</p>
+                  <p>{{actu.content}}</p>
               </div>
           </div>
       </ion-scroll>
