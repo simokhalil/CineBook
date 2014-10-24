@@ -62,9 +62,15 @@ angular.module('starter.controllers', [])
                     console.log("Error : " +json.error);
                     if(json.error == true) {
                         $scope.msgError = "Erreur de login";
+                        $scope.showError= function() {
+                            return true;
+                        }
                     }else{
                         console.log("login = " + user);
                         $state.go('tab.dash');
+                        $scope.showError= function() {
+                            return true;
+                        }
                     }
                 })
                 .error(function(data, status, headers, config){
