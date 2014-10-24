@@ -26,15 +26,15 @@ angular.module('starter.controllers', [])
         }*/
     });
 
-
     var actus = new Array();
+
     for(var i= 1; i<=10; i++){
         actus.push({"title": "Message"+i})
     }
     $scope.actus = actus;
 })
 
-.controller('SignInCtrl', function($scope, $state) {
+.controller('SignInCtrl', function($scope, $http, $state, Login) {
         $scope.fbLogin = function() {
             openFB.login(
                 function(response) {
@@ -51,7 +51,25 @@ angular.module('starter.controllers', [])
         $scope.doLogin = function(loginData){
             console.log("user : " + loginData.username);
             console.log("pass : " + loginData.password);
-            $state.go('tab.dash');
+            var user = {
+                login: loginData.username,
+                password : loginData.password
+            };
+            $http.post('http://cinebook.dev/login', user )
+                .success(function (data, status, headers, config) {
+                    var json = angular.fromJson(data);
+                    var user = angular.toJson(json);
+                    console.log("Error : " +json.error);
+                    if(json.error == true) {
+                        $scope.msgError = "Erreur de login";
+                    }else{
+                        console.log("login = " + user);
+                        $state.go('tab.dash');
+                    }
+                })
+                .error(function(data, status, headers, config){
+                    console.log('ERROR');
+                });
         };
 })
 
