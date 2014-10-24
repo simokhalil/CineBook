@@ -55,7 +55,7 @@ angular.module('starter.controllers', [])
                 login: loginData.username,
                 password : loginData.password
             };
-            $http.post('http://cinebook.dev/login', user )
+            $http.post('http://eimk.tk/cinebook/public/login', user )
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     var user = angular.toJson(json);
