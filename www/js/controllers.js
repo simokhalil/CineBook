@@ -63,7 +63,7 @@ angular.module('starter.controllers', [])
                     var user = angular.toJson(json);
                     console.log("Error : " +json.error);
                     if(json.error == true) {
-                        $scope.msgError = "Erreur de login";
+                        $scope.msgError = json;
                         $scope.showError= function() {
                             return true;
                         }
@@ -72,7 +72,7 @@ angular.module('starter.controllers', [])
                         globalJson.set(json);
                         $state.go('tab.dash');
                         $scope.showError= function() {
-                            return true;
+                            return false;
                         }
                     }
                 })
