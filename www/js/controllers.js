@@ -119,8 +119,8 @@ videoFilm.get($stateParams, function (data) {
 
 })
 
-.controller('FriendsCtrl', function($scope, Friends) {
-  $scope.friends = Friends.all();
+.controller('FriendsCtrl', function($scope, globalJson) {
+  $scope.friends = angular.fromJson(globalJson.get().friends);
 })
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
