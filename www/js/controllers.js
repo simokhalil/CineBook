@@ -27,6 +27,7 @@ angular.module('starter.controllers', [])
     });
 
         console.log("globalJson = " + angular.toJson(globalJson.get()));
+        $scope.globalJson = angular.fromJson(globalJson.get());
 
     var actus = new Array();
 
