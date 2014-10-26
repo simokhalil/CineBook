@@ -1,21 +1,9 @@
 angular.module('starter.controllers', [])
 
     /* Dashboard Controller */
-    .controller('DashCtrl', function($scope, $http, $state, Films, globalJson) {
-            /*theMovieDb.genres.getMovies({"id": "16"}, function(data){
-             var json = angular.fromJson(data);
-             console.log("json = " + data);
-             var imgs = angular.fromJson(json.results);
-             $scope.imgs = imgs;
-             console.log("imgs = " +$scope.imgs);
-             }, function(data){
-             console.log("error");
-             });*/
+    .controller('DashCtrl', function($scope, $http, $state, Films) {
 
         var user = angular.fromJson(window.localStorage['user']);
-        if(!user){
-            $state.go('signin');
-        }
 
         $http.post('http://eimk.tk/cinebook/public/userInfos', user )
             .success(function (data, status, headers, config) {
@@ -26,9 +14,7 @@ angular.module('starter.controllers', [])
                     $scope.msgError = json;
                 }else{
                     console.log("login = " + angular.toJson(user));
-                    globalJson.set(json);
                     window.localStorage['userInfos'] = userInfos;
-                    console.log("globalJson = " + angular.toJson(globalJson.get()));
                     $scope.globalJson = angular.fromJson(window.localStorage['userInfos']);
                 }
             })
@@ -50,7 +36,7 @@ angular.module('starter.controllers', [])
     })
 
     /* Login Controller */
-    .controller('SignInCtrl', function($scope, $http, $state, $ionicPopup,$ionicLoading, globalJson) {
+    .controller('SignInCtrl', function($scope, $http, $state, $ionicPopup,$ionicLoading) {
 
         $scope.doLogin = function(loginData){
             $ionicLoading.show();
