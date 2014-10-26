@@ -3,7 +3,7 @@
     <ion-content has-header="true">
 
         <img src="http://image.tmdb.org/t/p/w500/{{data.backdrop_path}}" style="width:100%;display:block;">
-        <h3 style="margin-top: 0px;text-align:center; ">Description du film</h3>
+        <h3 class="detail-film-section">Description du film</h3>
         <div style="display: table;margin-left: 10px;">
             <img src="http://image.tmdb.org/t/p/w500/{{data.poster_path}}" style="width:100px; float: left;">
             <div style="display: table-cell;vertical-align: middle;padding-left: 10px;">
@@ -14,7 +14,7 @@
 
         <div style="clear:both;"></div>
 
-        <h3 style="border-top: 50px;text-align:center;">Synopsis</h3>
+        <h3 class="detail-film-section">Synopsis</h3>
         <div style="margin-left: 10px;margin-right: 10px;text-align:justify;">
             {{data.overview}}
         </div>

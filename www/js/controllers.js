@@ -13,9 +13,8 @@ angular.module('starter.controllers', [])
              });*/
 
         var user = angular.fromJson(window.localStorage['user']);
-
         if(!user){
-            $state.go('tab.signin');
+            $state.go('signin');
         }
 
         $http.post('http://eimk.tk/cinebook/public/userInfos', user )
@@ -51,11 +50,12 @@ angular.module('starter.controllers', [])
     })
 
     /* Login Controller */
-    .controller('SignInCtrl', function($scope, $http, $state, globalJson) {
+    .controller('SignInCtrl', function($scope, $http, $state, $ionicPopup,$ionicLoading, globalJson) {
 
         $scope.doLogin = function(loginData){
-            console.log("user : " + loginData.login);
-            console.log("pass : " + loginData.password);
+            $ionicLoading.show();
+            //console.log("user : " + loginData.login);
+            //console.log("pass : " + loginData.password);
             var user = {
                 login: loginData.login,
                 password : loginData.password
@@ -63,25 +63,32 @@ angular.module('starter.controllers', [])
             $http.post('http://eimk.tk/cinebook/public/login', user )
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
-                    var userInfos = angular.toJson(json);
+                    //var userInfos = angular.toJson(json);
                     console.log("Error : " +json.error);
                     if(json.error == true) {
                         $scope.msgError = json;
-                        $scope.showError= function() {
+                        /*$scope.showError= function() {
                             return true;
-                        }
+                        }*/
+                        $ionicPopup.alert({
+                            title: 'Erreur d\'authentification',
+                            template: json.message
+                        });
+                        $ionicLoading.hide();
                     }else{
                         console.log("login = " + user);
                         window.localStorage['user'] = angular.toJson(user);
                         $state.go('tab.dash');
-                        $scope.showError= function() {
+                        /*$scope.showError= function() {
                             return false;
-                        }
+                        }*/
+                        $ionicLoading.hide();
                     }
                 })
                 .error(function(data, status, headers, config){
                     console.log('ERROR');
                 });
+
         };
 })
 
