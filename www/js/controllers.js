@@ -15,7 +15,7 @@ angular.module('starter.controllers', [])
                 }else{
                     console.log("login = " + angular.toJson(user));
                     window.localStorage['userInfos'] = userInfos;
-                    $scope.globalJson = angular.fromJson(window.localStorage['userInfos']);
+                    $scope.userInfos = angular.fromJson(window.localStorage['userInfos']);
                 }
             })
             .error(function(data, status, headers, config){
@@ -114,15 +114,19 @@ angular.module('starter.controllers', [])
 
     .controller('FriendsCtrl', function($scope) {
         $scope.friends = angular.fromJson(window.localStorage['userInfos']).friends;
+        $scope.data = {
+            showDelete: false
+        };
     })
 
-    .controller('FriendDetailCtrl', function($scope, $stateParams, $http, Friends) {
-        $scope.friend = Friends.get($stateParams.friendId);
-
+    .controller('FriendDetailCtrl', function($scope, $stateParams, $http, $ionicLoading) {
+        $ionicLoading.show();
         var user = angular.fromJson(window.localStorage['user']);
         $http.post('http://eimk.tk/cinebook/public/friend/'+$stateParams.friendId, user )
             .success(function (data, status, headers, config) {
                 var json = angular.fromJson(data);
+                $scope.friend = json.user;
+                $scope.actus = json.posts;
                 var friendInfos = angular.toJson(json);
                 console.log("friendInfos : " +friendInfos);
                 if(json.error == true) {
@@ -130,6 +134,7 @@ angular.module('starter.controllers', [])
                 }else{
 
                 }
+                $ionicLoading.hide();
             })
             .error(function(data, status, headers, config){
                 console.log('ERROR');

@@ -1,4 +1,8 @@
 <ion-view title="Accueil">
+    <ion-nav-bar align-title="center" class="bar-positive">
+        <h1 class="title">Accueil</h1>
+    </ion-nav-bar>
+
   <ion-content class="padding">
       <!--<div style="position: fixed">-->
         <h4>Derniers films</h4>
@@ -18,14 +22,33 @@
       <h4>Actualités</h4>
 
       <ion-scroll direction="y" class="scroll-vertical">
-          <div ng-repeat="actu in globalJson.posts" class="list card">
+          <div ng-repeat="actu in userInfos.posts" class="list card">
               <div class="item item-avatar">
-                  <img src="img/Gardiens-de-la-galaxie-nouvelle-affiche.jpg">
-                  <h2>{{actu.email}}</h2>
-                  <p>{{actu.created_at}}</p>
+                  <img src="img/avatar.jpg">
+                  <h2 class="actu-h2">{{actu.email}}</h2>
+                  <p style="font-size: 0.6em;">{{actu.created_at}}</p>
               </div>
-              <div class="item item-body">
-                  <p>{{actu.content}}</p>
+              <div class="item item-body" style="padding: 10px 10px 10px 10px;">
+                  <img class="full-image" src="img/film.jpg">
+                  <p style="margin-top: 10px;">{{actu.content}}</p>
+                  <p>
+                      <a href="#" class="subdued" style="color: #528CE0; font-size: 0.8em;">1 J'aime</a>
+                      <a href="#" class="subdued" style="color: #528CE0; font-size: 0.8em;">5 Commentaires</a>
+                  </p>
+              </div>
+              <div class="item tabs tabs-secondary tabs-icon-left">
+                  <a class="tab-item" href="#">
+                      <i class="icon ion-thumbsup"></i>
+                      J'aime
+                  </a>
+                  <a class="tab-item" href="#">
+                      <i class="icon ion-chatbox"></i>
+                      Commenter
+                  </a>
+                  <a class="tab-item" href="#">
+                      <i class="icon ion-share"></i>
+                      Partager
+                  </a>
               </div>
           </div>
       </ion-scroll>
