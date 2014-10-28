@@ -40,8 +40,8 @@
             </ion-item>
             <ion-item ng-repeat="friend in friends | filter: data.searchQuery" type="item-text-wrap" ng-click="friendDetails(friend.id);" style="background: #fff;">
 
-                {{friend.email}}
-                <ion-delete-button class="ion-minus-circled" ng-click="onFriendDelete(friend);"></ion-delete-button>
+                {{friend.first_name}} {{friend.last_name}}
+                <ion-delete-button class="ion-minus-circled" ion-stop-event="click" ng-click="onFriendDelete(friend);"></ion-delete-button>
             </ion-item>
         </ion-list>
     </ion-content>
