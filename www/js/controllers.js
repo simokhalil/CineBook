@@ -1,6 +1,8 @@
 angular.module('starter.controllers', [])
 
-    /* Dashboard Controller */
+    /*****************************************
+     * DASH *
+     *****************************************/
     .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, Films) {
         $ionicLoading.show();
         var user = angular.fromJson(window.localStorage['user']);
@@ -58,7 +60,10 @@ angular.module('starter.controllers', [])
         }
     })
 
-    /* Login Controller */
+
+    /*****************************************
+     * LOGIN *
+     *****************************************/
     .controller('SignInCtrl', function($scope, $http, $state, $ionicPopup,$ionicLoading, $ionicViewService) {
 
         $scope.doLogin = function(loginData){
@@ -103,8 +108,12 @@ angular.module('starter.controllers', [])
                 });
 
         };
-})
+    })
 
+
+    /*****************************************
+     * FILM DETAILS *
+     *****************************************/
     .controller('DetailFilmCtrl', function($scope, $stateParams, $ionicLoading, $ionicViewService, detailFilm, videoFilm){
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
@@ -145,16 +154,54 @@ angular.module('starter.controllers', [])
         })
     })
 
-    .controller('FriendsCtrl', function($scope,$state, $ionicPopup, $ionicModal, $ionicViewService) {
+    /*****************************************
+     * FRIENDS *
+     *****************************************/
+    .controller('FriendsCtrl', function($scope, $state, $http, $ionicPopup, $ionicModal, $ionicLoading, $ionicViewService) {
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
         });
-        $scope.friends = angular.fromJson(window.localStorage['userInfos']).friends;
+
+        $ionicLoading.show();
+        var user = angular.fromJson(window.localStorage['user']);
+        $http.post('http://eimk.tk/cinebook/public/friends', user )
+            .success(function (data, status, headers, config) {
+                var json = angular.fromJson(data);
+                $scope.friends = json.friends;
+
+                var friendInfos = angular.toJson(json.friends);
+                console.log("friendInfos : " +friendInfos);
+
+                $ionicLoading.hide();
+            })
+            .error(function(data, status, headers, config){
+                console.log('ERROR');
+            });
+
+        //$scope.friends = angular.fromJson(window.localStorage['userInfos']).friends;
         $scope.data = {
             showDelete: false
         };
 
+        $scope.refreshFriends = function(){
+            $http.post('http://eimk.tk/cinebook/public/friends', user )
+                .success(function (data, status, headers, config) {
+                    var json = angular.fromJson(data);
+                    $scope.friends = json.friends;
+
+                    var friendInfos = angular.toJson(json.friends);
+                    console.log("friendInfos : " +friendInfos);
+
+                    $ionicLoading.hide();
+                })
+                .error(function(data, status, headers, config){
+                    console.log('ERROR');
+                })
+                .finally(function(){
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
+        }
 
 
         $scope.onFriendDelete = function(friend) {
@@ -211,6 +258,10 @@ angular.module('starter.controllers', [])
         };
     })
 
+
+    /*****************************************
+     * FRIEND DETAILS *
+     *****************************************/
     .controller('FriendDetailCtrl', function($scope, $stateParams, $http, $ionicLoading, $ionicViewService) {
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
@@ -237,6 +288,10 @@ angular.module('starter.controllers', [])
             });
     })
 
+
+    /*****************************************
+     * PARAMETERS *
+     *****************************************/
     .controller('ParamsCtrl', function($scope, $state, $ionicViewService) {
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
@@ -248,6 +303,10 @@ angular.module('starter.controllers', [])
             };
     })
 
+
+    /*****************************************
+     * SEARCH *
+     *****************************************/
     .controller('SearchCtrl', function($scope,$ionicViewService) {
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
@@ -255,6 +314,10 @@ angular.module('starter.controllers', [])
         });
     })
 
+
+    /*****************************************
+     * CINEMA *
+     *****************************************/
     .controller('CinemaCtrl', function($scope, $state, $ionicPlatform) {
         /* Eviter le retour avec le bouton Back */
         var deregister = $ionicPlatform.registerBackButtonAction(function(event){
