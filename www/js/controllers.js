@@ -216,6 +216,16 @@ angular.module('starter.controllers', [])
             confirmPopup.then(function(res) {
                 if(res) {
                     console.log('Yes, tu es sûr');
+                    $ionicLoading.show();
+                    $http.post('http://eimk.tk/cinebook/public/friend/delete/'+friend.id, user )
+                        .success(function (data, status, headers, config) {
+
+                            $ionicLoading.hide();
+                            $scope.friends.splice($scope.friends.indexOf(friend), 1);
+                        })
+                        .error(function(data, status, headers, config){
+                            console.log('ERROR');
+                        });
                 } else {
                     console.log('Nan, tu n\'est pas sûr');
                 }
