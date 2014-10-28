@@ -1,5 +1,20 @@
 <ion-view title="Cinema">
+    <ion-nav-bar align-title="center" class="bar-dark">
+        <h1 class="title">Cinema</h1>
+    </ion-nav-bar>
   <ion-content class="padding">
-    <h1>Cinema</h1>
+      <div class="list">
+
+          <a  href="#/tab/detailFilm/{{img.id}}" ng-repeat="img in imgs"class="item item-thumbnail-left" href="#">
+
+              <img src="http://image.tmdb.org/t/p/w92/{{img.poster_path}}">
+              <h2>{{img.title}}</h2>
+              <p>{{data.overview}}
+                  <span class="paragraph-end"></span></p>
+          </a>
+
+          ...
+
+      </div>
   </ion-content>
 </ion-view>

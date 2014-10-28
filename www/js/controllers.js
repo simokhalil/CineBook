@@ -328,15 +328,21 @@ angular.module('starter.controllers', [])
     /*****************************************
      * CINEMA *
      *****************************************/
-    .controller('CinemaCtrl', function($scope, $state, $ionicPlatform) {
-        /* Eviter le retour avec le bouton Back */
-        var deregister = $ionicPlatform.registerBackButtonAction(function(event){
-            event.preventDefault();
-            event.stopPropagation();
-            $state.transitionTo("tab.dash");
-        },100);
+    .controller('CinemaCtrl', function($scope, $state, $ionicPlatform,Films,detailFilm) {
+        var result;
+        Films.get({id:16}, function(data){
+            var json = angular.fromJson(data);
+            console.log("json = " + angular.toJson(data));
+            result = angular.fromJson(json.results);
+            $scope.imgs = result;
+            console.log("imgs = " +result);
 
-        $scope.$on('$destroy', deregister);
-    });
+            /*$scope.goDetailFilm = function(filmData){
+             $state.go('film.detail');
+             }*/
+        });
+
+
+        });
 
 
