@@ -21,16 +21,26 @@
 
 
     <ion-content>
+        <!-- Pull to refresh -->
         <ion-refresher
                 on-refresh="refreshFriends()">
         </ion-refresher>
-        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+        <div id="search-box" class="bar bar-header item-input padding">
+            <div class="item-input-wrapper">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <input type="search" placeholder="Rechercher par nom, email,..." ng-model="data.searchQuery">
+                <i class="clear-search icon ion-ios7-close-outline" ng-click="clearSearch()"></i>
+            </div>
+        </div>
+        <ion-list show-delete="data.showDelete">
             <ion-item ng-if="friends.length == 0">
                 Clique sur <i class="icon ion-ios7-plus-outline"></i> pour ajouter un ami
             </ion-item>
-            <ion-item ng-repeat="friend in friends" type="item-text-wrap" ng-click="friendDetails(friend.id)" style="background: #fff;">
-                <ion-delete-button class="ion-minus-circled" ng-click="onFriendDelete(friend)"></ion-delete-button>
+            <ion-item ng-repeat="friend in friends | filter: data.searchQuery" type="item-text-wrap" ng-click="friendDetails(friend.id);" style="background: #fff;">
+
                 {{friend.email}}
+                <ion-delete-button class="ion-minus-circled" ng-click="onFriendDelete(friend);"></ion-delete-button>
             </ion-item>
         </ion-list>
     </ion-content>

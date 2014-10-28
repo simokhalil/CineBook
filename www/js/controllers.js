@@ -155,13 +155,7 @@ angular.module('starter.controllers', [])
             showDelete: false
         };
 
-        $scope.friendDetails = function(id){
-            $ionicViewService.nextViewOptions({
-                disableAnimate: false,
-                disableBack: false
-            });
-            $state.go('tab.friend-detail',{'friendId': id});
-        };
+
 
         $scope.onFriendDelete = function(friend) {
             console.log("item = " +angular.toJson(friend));
@@ -179,6 +173,14 @@ angular.module('starter.controllers', [])
                     console.log('Nan, tu n\'est pas sûr');
                 }
             });
+        };
+
+        $scope.friendDetails = function(id){
+            $ionicViewService.nextViewOptions({
+                disableAnimate: false,
+                disableBack: false
+            });
+            $state.go('tab.friend-detail',{'friendId': id});
         };
 
         // Load the add / change dialog from the given template URL
@@ -202,6 +204,10 @@ angular.module('starter.controllers', [])
                 scope: $scope,
                 animation: 'slide-in-up'
             });
+        };
+
+        $scope.clearSearch = function() {
+            $scope.data.searchQuery = '';
         };
     })
 
