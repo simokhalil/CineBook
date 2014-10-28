@@ -1,22 +1,37 @@
 <ion-view title="Amis">
 
-    <ion-nav-bar align-title="center" class="bar-positive">
+    <ion-nav-bar align-title="center" class="bar-dark">
         <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
             Back
         </ion-nav-back-button>
-        <div class="buttons">
-            <button class="button button-icon icon ion-ios7-minus-outline"
-                    ng-click="data.showDelete = !data.showDelete;"></button>
-        </div>
+
+        <ion-nav-buttons side="left">
+            <button class="button button-icon icon ion-ios7-plus-outline"
+                    ng-click="showAddDialog()">
+            </button>
+        </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+            <button class="button button-assertive button-icon icon ion-ios7-minus-outline" style="color:#ff0000;"
+                    ng-click="data.showDelete = !data.showDelete;">
+            </button>
+        </ion-nav-buttons>
     </ion-nav-bar>
 
-  <ion-content>
-    <ion-list show-delete="data.showDelete">
-      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/friend/{{friend.id}}" style="background: #fff;">
-          <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
-        {{friend.email}}
 
-      </ion-item>
-    </ion-list>
-  </ion-content>
+
+    <ion-content>
+        <ion-refresher
+                on-refresh="refreshFriends()">
+        </ion-refresher>
+        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+            <ion-item ng-if="friends.length == 0">
+                Clique sur <i class="icon ion-ios7-plus-outline"></i> pour ajouter un ami
+            </ion-item>
+            <ion-item ng-repeat="friend in friends" type="item-text-wrap" ng-click="friendDetails(friend.id)" style="background: #fff;">
+                <ion-delete-button class="ion-minus-circled" ng-click="onFriendDelete(friend)"></ion-delete-button>
+                {{friend.email}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

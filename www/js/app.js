@@ -7,125 +7,125 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.directives'])
 
-.run(function($ionicPlatform, $state) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
+    .run(function ($ionicPlatform, $state) {
+        $ionicPlatform.ready(function () {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if (window.cordova && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if (window.StatusBar) {
+                // org.apache.cordova.statusbar required
+                StatusBar.styleDefault();
+            }
 
-      var user = angular.fromJson(window.localStorage['user']);
-      if(!user){
-          $state.go('signin');
-      }
-  });
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-
-    //openFB.init({appId: '314876622033222'});
-
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
-
-      .state('signin', {
-          url: '/sign-in',
-          templateUrl: 'templates/login.html',
-          controller: 'SignInCtrl'
-      })
-
-
-    // setup an abstract state for the tabs directive
-    .state('tab', {
-      url: "/tab",
-      abstract: true,
-      templateUrl: "templates/tabs.html"
+            var user = angular.fromJson(window.localStorage['user']);
+            if (!user) {
+                $state.go('signin');
+            }
+        });
     })
 
+    .config(function ($stateProvider, $urlRouterProvider) {
 
-    // Each tab has its own nav history stack:
+        //openFB.init({appId: '314876622033222'});
 
-    .state('tab.dash', {
-      url: '/dash',
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-dash.html',
-          controller: 'DashCtrl'
-        }
-      }
-    })
+        // Ionic uses AngularUI Router which uses the concept of states
+        // Learn more here: https://github.com/angular-ui/ui-router
+        // Set up the various states which the app can be in.
+        // Each state's controller can be found in controllers.js
+        $stateProvider
 
-      .state('tab.detailFilm', {
-          url: '/detailFilm/:idFilm',
-          views: {
-              'tab-dash': {
-                  templateUrl: "templates/detailFilm.html",
-                  controller: 'DetailFilmCtrl'
-              }
-          }
-      })
-
-    .state('tab.friends', {
-      url: '/friends',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
-        }
-      }
-    })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
-        }
-      }
-    })
+            .state('signin', {
+                url: '/sign-in',
+                templateUrl: 'templates/login.html',
+                controller: 'SignInCtrl'
+            })
 
 
-      .state('tab.cinema', {
-          url: '/cinema',
-          views: {
-              'tab-cinema': {
-                  templateUrl: 'templates/tab-cinema.html',
-                  controller: 'CinemaCtrl'
-              }
-          }
-      })
+            // setup an abstract state for the tabs directive
+            .state('tab', {
+                url: "/tab",
+                abstract: true,
+                templateUrl: "templates/tabs.html"
+            })
 
-      .state('tab.search', {
-          url: '/search',
-          views: {
-              'tab-search': {
-                  templateUrl: 'templates/tab-search.html',
-                  controller: 'SearchCtrl'
-              }
-          }
-      })
 
-    .state('tab.params', {
-      url: '/params',
-      views: {
-        'tab-params': {
-          templateUrl: 'templates/tab-params.html',
-          controller: 'ParamsCtrl'
-        }
-      }
+            // Each tab has its own nav history stack:
+
+            .state('tab.dash', {
+                url: '/dash',
+                views: {
+                    'tab-dash': {
+                        templateUrl: 'templates/tab-dash.html',
+                        controller: 'DashCtrl'
+                    }
+                }
+            })
+
+            .state('tab.detailFilm', {
+                url: '/detailFilm/:idFilm',
+                views: {
+                    'tab-dash': {
+                        templateUrl: "templates/detailFilm.html",
+                        controller: 'DetailFilmCtrl'
+                    }
+                }
+            })
+
+            .state('tab.friends', {
+                url: '/friends',
+                views: {
+                    'tab-friends': {
+                        templateUrl: 'templates/tab-friends.html',
+                        controller: 'FriendsCtrl'
+                    }
+                }
+            })
+            .state('tab.friend-detail', {
+                url: '/friend/:friendId',
+                views: {
+                    'tab-friends': {
+                        templateUrl: 'templates/friend-detail.html',
+                        controller: 'FriendDetailCtrl'
+                    }
+                }
+            })
+
+
+            .state('tab.cinema', {
+                url: '/cinema',
+                views: {
+                    'tab-cinema': {
+                        templateUrl: 'templates/tab-cinema.html',
+                        controller: 'CinemaCtrl'
+                    }
+                }
+            })
+
+            .state('tab.search', {
+                url: '/search',
+                views: {
+                    'tab-search': {
+                        templateUrl: 'templates/tab-search.html',
+                        controller: 'SearchCtrl'
+                    }
+                }
+            })
+
+            .state('tab.params', {
+                url: '/params',
+                views: {
+                    'tab-params': {
+                        templateUrl: 'templates/tab-params.html',
+                        controller: 'ParamsCtrl'
+                    }
+                }
+            });
+
+
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/tab/dash');
+
     });
-
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
-
-});
 

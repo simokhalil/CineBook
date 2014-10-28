@@ -1,6 +1,6 @@
 <ion-view title="{{data.title}}">
 
-    <ion-nav-bar align-title="center" class="bar-positive">
+    <ion-nav-bar align-title="center" class="bar-dark">
         <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
             Back
         </ion-nav-back-button>
@@ -10,11 +10,11 @@
 
         <img src="http://image.tmdb.org/t/p/w500/{{data.backdrop_path}}" style="width:100%;display:block;">
         <h3 class="detail-film-section">Description du film</h3>
-        <div style="display: table;margin-left: 10px;">
+        <div style="display: table;margin-left: 10px;margin-bottom: 10px;">
             <img src="http://image.tmdb.org/t/p/w500/{{data.poster_path}}" style="width:100px; float: left;">
             <div style="display: table-cell;vertical-align: middle;padding-left: 10px;">
-                Genres : {{genres}} </br>
-                Date de sortie : {{release_date}}
+                <strong>Genres :</strong> {{genres}} </br>
+                <strong>Date de sortie :</strong> {{release_date}}
             </div>
         </div>
 

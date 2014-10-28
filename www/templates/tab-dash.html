@@ -1,9 +1,9 @@
 <ion-view title="Accueil">
-    <ion-nav-bar align-title="center" class="bar-positive">
+    <ion-nav-bar align-title="center" class="bar-dark">
         <h1 class="title">Accueil</h1>
     </ion-nav-bar>
 
-  <ion-content class="padding">
+  <ion-content class="padding" scroll="false">
       <!--<div style="position: fixed">-->
         <h4>Derniers films</h4>
               <ion-scroll direction="x" scrollbar-x="false" class="wide-as-needed-horizontal" >
@@ -22,6 +22,9 @@
       <h4>Actualités</h4>
 
       <ion-scroll direction="y" class="scroll-vertical">
+          <ion-refresher
+                  on-refresh="refreshActus()">
+          </ion-refresher>
           <div ng-repeat="actu in userInfos.posts" class="list card">
               <div class="item item-avatar">
                   <img src="img/avatar.jpg">
