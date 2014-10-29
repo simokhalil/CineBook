@@ -348,19 +348,31 @@ angular.module('starter.controllers', [])
      *****************************************/
     .controller('CinemaCtrl', function($scope, $state, $ionicPlatform,Films,detailFilm) {
         var result;
-        Films.get({id:16}, function(data){
+        Films.get({id:16}, function(data) {
             var json = angular.fromJson(data);
             console.log("json = " + angular.toJson(data));
             result = angular.fromJson(json.results);
             $scope.imgs = result;
-            console.log("imgs = " +result);
+            console.log("imgs = " + angular.toJson(result));
 
             /*$scope.goDetailFilm = function(filmData){
              $state.go('film.detail');
              }*/
+            var overviews= new Array();
+            for (var i = 0; i < 1; i++) {
+                console.log(result[i].id);
+                detailFilm.get({idFilm:result[i].id}, function (data) {
+
+                    var json = angular.fromJson(data);
+                    console.log("json= " + angular.toJson(data));
+                    overviews.push(json.overview);
+                });
+
+            }
+
+            $scope.overviews = overviews;
         });
 
-
-        });
+    });
 
 
