@@ -266,6 +266,24 @@ angular.module('starter.controllers', [])
         $scope.clearSearch = function() {
             $scope.data.searchQuery = '';
         };
+
+        $scope.searchFriend = function(query){
+            console.log('query = ' +query);
+            var user = angular.fromJson(window.localStorage['user']);
+            $http.post('http://eimk.tk/cinebook/public/friend/search/'+query, user )
+                .success(function (data, status, headers, config) {
+                    var json = angular.fromJson(data);
+                    console.log("search = " + angular.toJson(data));
+                    $scope.friendResults = json.results;
+                })
+                .error(function(data, status, headers, config){
+                    console.log('ERROR');
+                });
+        }
+
+        $scope.addFriend = function(friendId){
+            console.log(friendId);
+        }
     })
 
 

@@ -10,12 +10,25 @@
             <div class="list">
                 <div class="item item-input-inset">
                     <label class="item-input-wrapper" style="background: #fff;">
-                        <input type="text" placeholder="Rechercher">
+                        <input type="text" placeholder="Rechercher" ng-model="friendQuery">
                     </label>
-                    <button class="button button-small icon ion-search button-dark"></button>
+                    <button class="button button-small icon ion-search button-dark" ng-click="searchFriend(friendQuery);"></button>
                 </div>
             </div>
         </form>
+
+        <ion-list>
+            <ion-item ng-if="friendResults.length == 0">
+                Aucun résultat trouvé
+            </ion-item>
+            <ion-item class="item-button-right" ng-repeat="result in friendResults" type="item-text-wrap" style="background: #fff;">
+
+                {{result.first_name}} {{result.last_name}}
+                <button class="button button-positive" ng-click="addFriend(result.id)">
+                    <i class="icon ion-person-add"></i>
+                </button>
+            </ion-item>
+        </ion-list>
     </ion-content>
 
 </ion-modal-view>
