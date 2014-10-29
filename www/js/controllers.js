@@ -346,7 +346,7 @@ angular.module('starter.controllers', [])
     /*****************************************
      * CINEMA *
      *****************************************/
-    .controller('CinemaCtrl', function($scope, $state, $ionicPlatform,Films,detailFilm) {
+    .controller('CinemaCtrl', function($scope, $state, $ionicPlatform, $timeout, Films, FilmsPaginated, detailFilm) {
 
         var result;
         var overviews = new Array();
@@ -369,12 +369,30 @@ angular.module('starter.controllers', [])
 
             $scope.overviews = overviews;
         });
-        $scope.loadMore = function() {
-            console.log("taruj");
-            $scope.overviews.push("tarik");
-                $scope.$broadcast('scroll.infiniteScrollComplete');
 
+        $timeout(function() {
+            $scope.page = 1;
+        }, 1000);
+
+        $scope.loadMore = function() {
+            $timeout(function() {
+                $scope.page += 1;
+                FilmsPaginated.get({id: 16, page:$scope.page}, function (data) {
+                    var json = angular.fromJson(data);
+
+                    result = angular.fromJson(json.results);
+
+                    for (var i = 0; i < result.length; i++) {
+                        detailFilm.get({idFilm: result[i].id}, function (data) {
+                            var json = angular.fromJson(data);
+                            $scope.overviews.push(json);
+                        });
+                    }
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                });
+            }, 1000);
         };
+
 
         $scope.$on('$stateChangeSuccess', function() {
             $scope.loadMore();

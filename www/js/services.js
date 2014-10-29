@@ -4,6 +4,10 @@ angular.module('starter.services', ['ngResource'])
         return $resource("http://api.themoviedb.org/3/genre/:id/movies?api_key=149afb8797c85940697c2759d764a2c7");
     })
 
+    .factory("FilmsPaginated", function($resource) {
+        return $resource("http://api.themoviedb.org/3/genre/:id/movies?api_key=149afb8797c85940697c2759d764a2c7&page=:page");
+    })
+
     .factory("detailFilm", function($resource) {
         return $resource("http://api.themoviedb.org/3/movie/:idFilm?api_key=149afb8797c85940697c2759d764a2c7&language=fr");
     })
