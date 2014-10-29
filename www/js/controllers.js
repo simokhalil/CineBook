@@ -347,16 +347,18 @@ angular.module('starter.controllers', [])
      * CINEMA *
      *****************************************/
     .controller('CinemaCtrl', function($scope, $state, $ionicPlatform,Films,detailFilm) {
+
         var result;
+        var overviews = new Array();
         Films.get({id:16}, function(data) {
             var json = angular.fromJson(data);
 
             result = angular.fromJson(json.results);
 
-            var overviews= new Array();
+
             for (var i = 0; i < result.length; i++) {
                 console.log(result[i].id);
-                detailFilm.get({idFilm:result[i].id}, function (data) {
+                detailFilm.get({idFilm: result[i].id}, function (data) {
 
                     var json = angular.fromJson(data);
                     console.log("json= " + angular.toJson(data));
@@ -367,6 +369,18 @@ angular.module('starter.controllers', [])
 
             $scope.overviews = overviews;
         });
+        $scope.loadMore = function() {
+            console.log("taruj");
+            $scope.overviews.push("tarik");
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+
+        };
+
+        $scope.$on('$stateChangeSuccess', function() {
+            $scope.loadMore();
+        });
+
+
 
     });
 

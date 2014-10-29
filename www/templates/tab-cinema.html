@@ -2,9 +2,9 @@
     <ion-nav-bar align-title="center" class="bar-dark">
         <h1 class="title">Cinema</h1>
     </ion-nav-bar>
-  <ion-content class="padding">
-      <div class="list">
+  <ion-content class="padding" >
 
+      <div class="list">
           <a  href="#/tab/detailFilm/{{img.id}}" ng-repeat="overview in overviews"  class="item item-thumbnail-left" href="#">
 
               <img src="http://image.tmdb.org/t/p/w92/{{overview.poster_path}}">
@@ -13,8 +13,11 @@
                   <span class="paragraph-end"></span></p>
           </a>
 
-          ...
+
 
       </div>
+
+      <ion-infinite-scroll on-infinite="loadMore()">
+      </ion-infinite-scroll>
   </ion-content>
 </ion-view>
