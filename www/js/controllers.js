@@ -350,14 +350,9 @@ angular.module('starter.controllers', [])
         var result;
         Films.get({id:16}, function(data) {
             var json = angular.fromJson(data);
-            console.log("json = " + angular.toJson(data));
-            result = angular.fromJson(json.results);
-            $scope.imgs = result;
-            console.log("imgs = " + angular.toJson(result));
 
-            /*$scope.goDetailFilm = function(filmData){
-             $state.go('film.detail');
-             }*/
+            result = angular.fromJson(json.results);
+
             var overviews= new Array();
             for (var i = 0; i < result.length; i++) {
                 console.log(result[i].id);
