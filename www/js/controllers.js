@@ -377,6 +377,7 @@ angular.module('starter.controllers', [])
         $scope.loadMore = function() {
             $timeout(function() {
                 $scope.page += 1;
+                console.log("appel "+$scope.page);
                 FilmsPaginated.get({id: 16, page:$scope.page}, function (data) {
                     var json = angular.fromJson(data);
 
@@ -395,7 +396,8 @@ angular.module('starter.controllers', [])
 
 
         $scope.$on('$stateChangeSuccess', function() {
-            $scope.loadMore();
+            //$scope.loadMore();
+            console.log("done");
         });
 
 

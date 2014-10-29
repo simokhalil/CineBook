@@ -1,21 +1,13 @@
 
 
 <ion-view title="Cinebook">
-    <ion-content has-header="true" padding="true">
+    <ion-content has-header="true" padding="true" scroll="false" class="login-view">
+        <h1 class="login-logo">Cinebook</h1>
         <form ng-submit="doLogin(loginData)">
-            <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">Nom d'utilisateur</span>
-                    <input type="text" ng-model="loginData.login" required/>
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Mot de passe</span>
-                    <input type="password" ng-model="loginData.password" />
-                </label>
-                <label class="item">
-                    <button class="button button-block button-positive" type="submit">Se connecter</button>
-                </label>
-            </div>
+                    <input type="text" ng-model="loginData.login" placeholder="Nom d'utilisateur" class="card" style="margin-top: 25px;padding: 0 10px;" required/>
+                    <input type="password" ng-model="loginData.password" placeholder="Mot de passe" class="card" style="margin-top: 25px;padding: 0 10px;" />
+                    <div style="margin-top: 25px;color:#fff;text-align: center;">Mot de passe oublié?</div>
+                    <button class="button button-block button-calm card" type="submit" style="margin-top: 25px;">Se connecter</button>
         </form>
 
         <!--<label class="item">
