@@ -1,6 +1,9 @@
 /* Lato Google Font */
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic&subset=latin,latin-ext);
-
+@import url(http://fonts.googleapis.com/css?family=Kranky);
+@import url(http://fonts.googleapis.com/css?family=Sue+Ellen+Francisco);
+@import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
+@import url(http://fonts.googleapis.com/css?family=Fugaz+One);
 
 /* Empty. Add your own CSS if you like */
 .wide-as-needed-horizontal {
@@ -84,10 +87,18 @@
 }
 
 .film-list-item{
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
     margin-right: 10px;
-    width: 90px;
-    padding-top: 4px;
-    background: #ffffff;
+    -moz-box-shadow: 1px 1px 2px 1px #656565;
+    -webkit-box-shadow: 1px 1px 2px 1px #656565;
+    -o-box-shadow: 1px 1px 2px 1px #656565;
+    box-shadow: 1px 1px 2px 1px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=2);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .film-list-item:active{
@@ -107,34 +118,38 @@
 }
 
 .film-list-item-image{
-    height: 130px;
-    width: 90px;
+    width: 100%;
+    height: auto;
 }
 
 .film-list-item-details{
-    font-size: 0.6em;
-    background: #ffffff;
-    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    color: #ffffff;
+    padding: 10px 0;
+    font-size: 0.8em;
+    font-family: 'Lato' sans-serif;
+    font-weight: 300;
     line-height: normal;
-    -webkit-box-shadow: inset -44px -4px 118px -28px rgba(255,255,255,1);
-    -moz-box-shadow: inset -44px -4px 118px -28px rgba(255,255,255,1);
-    box-shadow: inset -44px -4px 118px -28px rgba(255,255,255,1);
+    padding-left: 5px;
 }
 
 ion-content{
-    background-color: #e5e5e5;
+    background-color: #ffffff;
 }
 
 .paragraph-end {
-    background-image: -webkit-gradient(linear,left top,right top,color-stop(0%,rgba(255,255,255,0)),color-stop(100%,rgba(255,255,255,1)));
-    background-image: -webkit-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,1));
-    background-image: -moz-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,1));
-    background-image: -ms-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,1));
-    background-image: -o-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,1));
-    background: linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,1));
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#00ffffff',EndColorStr='#ffffff');
-    bottom: 10px;
-    height: 15px;
+    background-image: -webkit-gradient(linear,left top,right top,color-stop(0%,rgba(0,0,0,0)),color-stop(100%,rgba(0,0,0,1)));
+    background-image: -webkit-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,1));
+    background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,1));
+    background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,1));
+    background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,1));
+    background: linear-gradient(to right,rgba(0,0,0,0),rgba(0,0,0,1));
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#00000000',EndColorStr='#000000ff');
+    top: 11px;
+    height: 18px;
     max-height: 100%;
     position: absolute;
     right: 0;
@@ -217,5 +232,25 @@ h4, .h4, h5, .h5, h6, .h6{
     font-weight: 400;
     margin-bottom: 30px;
     margin-top: 40px;
-    font-family: 'Lato', sans-serif;;
+    font-family: 'Lato', sans-serif;
 }
+
+.titre {
+    font-family: 'Lato', sans-serif;
+    color: #43cee6;
+    padding: 25px;
+}
+
+.title, .tab-title, .button-calm{
+    font-family: 'Fugaz One', cursive;
+}
+
+
+/*
+h2{
+    font-family: 'Fugaz One', cursive;
+}
+
+body{
+    font-family: 'Architects Daughter', cursive;
+}*/

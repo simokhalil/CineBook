@@ -1,14 +1,13 @@
 <ion-view title="Accueil">
-    <ion-nav-bar align-title="center" class="bar-dark">
-        <h1 class="title">Accueil</h1>
+    <ion-nav-bar align-title="center" class="bar bar-header bar-calm">
     </ion-nav-bar>
 
-  <ion-content class="padding" scroll="false">
+  <ion-content class="padding">
       <!--<div style="position: fixed">-->
-        <h4>Derniers films</h4>
-              <ion-scroll direction="x" scrollbar-x="false" class="wide-as-needed-horizontal" >
+        <h3 class="titre"><i class="icon ion-ios7-film-outline" style="margin-right: 20px;"></i> Derniers films</h3>
+              <ion-scroll direction="x" scrollbar-x="false" class="wide-as-needed-horizontal" style="background: #fff;">
                   <a href="#/tab/detailFilm/{{img.id}}" ng-repeat="img in imgs" class="button inline-button img-button film-list-item">
-                      <img src="http://image.tmdb.org/t/p/w92/{{img.poster_path}}" class="film-list-item-image">
+                      <img src="http://image.tmdb.org/t/p/w154/{{img.poster_path}}" class="film-list-item-image">
                       <div class="film-list-item-details">
                           {{img.original_title}} <br/>
                           Note : {{img.vote_average}}/10
@@ -16,12 +15,10 @@
                       </div>
                   </a>
               </ion-scroll>
-          <hr/>
       <!--</div>-->
 
-      <h4 style="font-family: arial, sans-serif;">Actualités</h4>
+      <h3 class="titre"><i class="icon ion-grid" style="margin-right: 20px"></i> Actualités</h3>
 
-      <ion-scroll direction="y" class="scroll-vertical">
           <ion-refresher
                   on-refresh="refreshActus()">
           </ion-refresher>
@@ -54,7 +51,6 @@
                   </a>
               </div>
           </div>
-      </ion-scroll>
 
 
 
