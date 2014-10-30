@@ -3,6 +3,10 @@
     </ion-nav-bar>
 
   <ion-content class="padding">
+      <ion-refresher
+              on-refresh="refreshActus()">
+      </ion-refresher>
+
       <!--<div style="position: fixed">-->
         <h3 class="titre"><i class="icon ion-ios7-film-outline" style="margin-right: 20px;"></i> Derniers films</h3>
               <ion-scroll direction="x" scrollbar-x="false" class="wide-as-needed-horizontal" style="background: #fff;">
@@ -19,9 +23,6 @@
 
       <h3 class="titre"><i class="icon ion-grid" style="margin-right: 20px"></i> Actualités</h3>
 
-          <ion-refresher
-                  on-refresh="refreshActus()">
-          </ion-refresher>
           <div ng-repeat="actu in userInfos.posts" class="list card">
               <div class="item item-avatar">
                   <img src="img/avatar.jpg">
