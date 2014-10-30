@@ -24,21 +24,25 @@
       <h3 class="titre"><i class="icon ion-grid" style="margin-right: 20px"></i> Actualités</h3>
 
           <div ng-repeat="actu in userInfos.posts" class="list card">
-              <div class="item item-avatar">
+              <div class="item item-avatar" style="border-bottom: 0;">
                   <img src="img/avatar.jpg">
                   <h2 class="actu-h2"><strong>{{actu.first_name}} {{actu.last_name}}</strong></h2>
                   <p style="font-size: 0.6em;">{{actu.created_at}}</p>
               </div>
-              <div class="item item-body" style="padding: 10px 10px 10px 10px;">
+              <div class="item item-body" style="padding: 10px 10px 10px 10px; border-top: 0;">
                   <img class="full-image" src="img/film.jpg">
                   <p style="margin-top: 10px;">{{actu.content}}</p>
                   <p>
-                      <a href="#" class="subdued" style="color: #528CE0; font-size: 0.8em;">1 J'aime</a>
-                      <a href="#" class="subdued" style="color: #528CE0; font-size: 0.8em;">5 Commentaires</a>
+                      <a href="#" class="subdued" style="color: #528CE0; font-size: 0.8em;">{{actu.likes}} J'aime</a>
+                      <a href="#" class="subdued" style="color: #528CE0; font-size: 0.8em;">{{actu.comments}} Commentaires</a>
                   </p>
               </div>
-              <div class="item tabs tabs-secondary tabs-icon-left">
-                  <a class="tab-item" href="#">
+              <div class="item tabs tabs-secondary tabs-icon-left" style="background-color: #fff;">
+                  <a class="tab-item" ng-click="like(actu)" ng-if="actu.likes==0">
+                      <i class="icon ion-thumbsup"></i>
+                      J'aime
+                  </a>
+                  <a class="tab-item" ng-if="actu.likes>0" ng-click="like(actu)" style="color: #0000ff">
                       <i class="icon ion-thumbsup"></i>
                       J'aime
                   </a>

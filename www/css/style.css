@@ -182,7 +182,7 @@ h4, .h4, h5, .h5, h6, .h6{
     max-width: 40px;
     max-height: 40px;
     width: 100%;
-    border-radius: 4px;
+    border-radius: 0px;
     margin-right: 10px;
 }
 
@@ -269,6 +269,9 @@ h4, .h4, h5, .h5, h6, .h6{
     padding: 8px 49px 8px 5px;
 }
 
+.bar-actions {
+
+}
 
 /*
 h2{
