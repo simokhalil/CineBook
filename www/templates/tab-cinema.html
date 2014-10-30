@@ -5,7 +5,7 @@
   <ion-content class="padding" >
 
       <div class="list">
-          <a  href="#/tab/detailFilm/{{img.id}}" ng-repeat="overview in overviews"  class="item item-thumbnail-left" href="#">
+          <a  href="#/tab/detailFilm/{{overview.id}}" ng-repeat="overview in overviews"  class="item item-thumbnail-left" href="#">
 
               <img src="http://image.tmdb.org/t/p/w92/{{overview.poster_path}}">
               <h2>{{overview.title}}</h2>

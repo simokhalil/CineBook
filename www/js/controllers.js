@@ -16,7 +16,7 @@ angular.module('starter.controllers', [])
     /*****************************************
      * DASH *
      *****************************************/
-    .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, Films) {
+    .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, Films, FilmsDisney) {
         $ionicLoading.show();
         var user = angular.fromJson(window.localStorage['user']);
 
@@ -39,16 +39,21 @@ angular.module('starter.controllers', [])
                 $ionicLoading.hide();
             });
 
-        Films.get({id:16}, function(data){
+        /*Films.get({id:16}, function(data){
             var json = angular.fromJson(data);
             console.log("json = " + angular.toJson(data));
             var imgs = angular.fromJson(json.results);
             $scope.imgs = imgs;
             console.log("imgs = " +imgs);
+        });*/
 
-            /*$scope.goDetailFilm = function(filmData){
-                $state.go('film.detail');
-            }*/
+
+        FilmsDisney.get({id:'51224e42760ee3297424a1e0'}, function(data){
+            var json = angular.fromJson(data);
+            console.log("json = " + angular.toJson(data));
+            var imgs = angular.fromJson(json.items);
+            $scope.imgs = imgs;
+            console.log("imgs = " +imgs);
         });
 
 

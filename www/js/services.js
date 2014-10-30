@@ -1,11 +1,15 @@
 angular.module('starter.services', ['ngResource'])
 
     .factory("Films", function($resource) {
-        return $resource("http://api.themoviedb.org/3/genre/:id/movies?api_key=149afb8797c85940697c2759d764a2c7");
+        return $resource("http://api.themoviedb.org/3/genre/:id/movies?api_key=149afb8797c85940697c2759d764a2c7&sort_by=release_date.desc");
+    })
+
+    .factory("FilmsDisney", function($resource) {
+        return $resource("http://api.themoviedb.org/3/list/:id?language=fr&api_key=149afb8797c85940697c2759d764a2c7");
     })
 
     .factory("FilmsPaginated", function($resource) {
-        return $resource("http://api.themoviedb.org/3/genre/:id/movies?api_key=149afb8797c85940697c2759d764a2c7&page=:page");
+        return $resource("http://api.themoviedb.org/3/genre/:id/movies?api_key=149afb8797c85940697c2759d764a2c7&page=:page&sort_by=release_date.desc");
     })
 
     .factory("detailFilm", function($resource) {
