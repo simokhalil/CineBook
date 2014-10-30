@@ -419,12 +419,12 @@ angular.module('starter.controllers', [])
     /*****************************************
      * SEARCH *
      *****************************************/
-    .controller('SearchCtrl', function($scope,$ionicViewService) {
+    /*.controller('SearchCtrl', function($scope,$ionicViewService) {
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
         });
-    })
+    })*/
 
 
     /*****************************************

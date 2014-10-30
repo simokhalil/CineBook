@@ -103,7 +103,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 }
             })
 
-            .state('tab.search', {
+            /*.state('tab.search', {
                 url: '/search',
                 views: {
                     'tab-search': {
@@ -111,7 +111,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                         controller: 'SearchCtrl'
                     }
                 }
-            })
+            })*/
 
             .state('tab.params', {
                 url: '/params',
