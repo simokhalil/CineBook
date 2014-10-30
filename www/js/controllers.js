@@ -1,5 +1,18 @@
 angular.module('starter.controllers', [])
 
+    .controller('BodyCtrl', function($scope, Friendship) {
+        var user = angular.fromJson(window.localStorage['user']);
+        $scope.badge = {};
+
+        Friendship.async().then(function(d) {
+            $scope.badge.friend = d;
+            console.log("Friendship = " +angular.toJson($scope.badge.friend) );
+        });
+
+
+
+    })
+
     /*****************************************
      * DASH *
      *****************************************/
@@ -37,6 +50,7 @@ angular.module('starter.controllers', [])
                 $state.go('film.detail');
             }*/
         });
+
 
         $scope.refreshActus = function(){
             $http.post('http://eimk.tk/cinebook/public/userInfos', user )
@@ -158,7 +172,7 @@ angular.module('starter.controllers', [])
     /*****************************************
      * FRIENDS *
      *****************************************/
-    .controller('FriendsCtrl', function($scope, $state, $http, $ionicPopup, $ionicModal, $ionicLoading, $ionicViewService) {
+    .controller('FriendsCtrl', function($scope, $state, $http, $ionicPopup, $ionicModal, $ionicLoading, $ionicViewService, Friendship) {
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
@@ -188,6 +202,11 @@ angular.module('starter.controllers', [])
             showDelete: false
         };
 
+        Friendship.async().then(function(d) {
+            $scope.badge.friend = d;
+            console.log("Friendship = " +angular.toJson($scope.badge.friend) );
+        });
+
         $scope.refreshFriends = function(){
             $http.post('http://eimk.tk/cinebook/public/friends', user )
                 .success(function (data, status, headers, config) {
@@ -203,6 +222,10 @@ angular.module('starter.controllers', [])
                     console.log('ERROR');
                 })
                 .finally(function(){
+                    Friendship.async().then(function(d) {
+                        $scope.badge.friend = d;
+                        console.log("Friendship = " +angular.toJson($scope.badge.friend) );
+                    });
                     $scope.$broadcast('scroll.refreshComplete');
                 });
         }
@@ -298,6 +321,46 @@ angular.module('starter.controllers', [])
                     console.log('ERROR');
                 });
         }
+
+        $scope.friendshipDeal = function(friend){
+            var confirmPopup = $ionicPopup.confirm({
+                title: friend.first_name +' '+ friend.last_name,
+                template: 'Accepte-tu l\'invitation ?',
+                okText: 'Confirmer',
+                okType: 'button-stable',
+                cancelText: 'Supprimer',
+                cancelType : 'button-assertive'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    $ionicLoading.show();
+                    $http.post('http://eimk.tk/cinebook/public/friend/confirm/'+friend.id, user )
+                        .success(function (data, status, headers, config) {
+
+                            $ionicLoading.hide();
+                            $scope.refreshFriends();
+                        })
+                        .error(function(data, status, headers, config){
+                            console.log('ERROR');
+                        });
+                } else {
+                    $http.post('http://eimk.tk/cinebook/public/friend/decline/'+friend.id, user )
+                        .success(function (data, status, headers, config) {
+
+                            $ionicLoading.hide();
+                            $scope.refreshFriends();
+                        })
+                        .error(function(data, status, headers, config){
+                            console.log('ERROR');
+                        });
+                }
+
+                Friendship.async().then(function(d) {
+                    //$scope.badge.friend = d;
+                    console.log("Friendship = " +angular.toJson($scope.badge.friend) );
+                });
+            });
+        }
     })
 
 
@@ -339,6 +402,8 @@ angular.module('starter.controllers', [])
             disableAnimate: true,
             disableBack: true
         });
+
+        $scope.user = angular.fromJson(window.localStorage['userInfos']).user;
             $scope.logout = function(){
                 window.localStorage.clear();
                 $state.go('signin');

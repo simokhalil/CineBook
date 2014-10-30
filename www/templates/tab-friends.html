@@ -37,13 +37,15 @@
             <ion-item ng-if="friends.length == 0">
                 Clique sur <i class="icon ion-ios7-plus-outline"></i> pour ajouter un ami
             </ion-item>
-            <ion-item ng-repeat="friend in friends | filter: data.searchQuery" type="item-text-wrap" ng-click="friendDetails(friend.id);" class="item-icon-left item-icon-right" style="background: #fff;">
+            <ion-item ng-repeat="friend in friends | filter: data.searchQuery" type="item-text-wrap" ng-click="friendDetails(friend.id);" class="item-icon-left item-icon-right item-button-right" style="background: #fff;">
                 <i class="icon ion-person" style="color: #43cee6;"></i>
-                <div style="display: inline-block"> {{friend.first_name}} {{friend.last_name}}</div>
+                <div style="display: inline-block;line-height: 1.8em"> {{friend.first_name}} {{friend.last_name}}</div>
+
                 <i class="icon ion-forward" ng-if="friend.status==2 && friend.user_first==userId" style="color: #43cee6; font-size: 1.5em;"></i>
-                <i class="icon ion-reply" ng-if="friend.status==2 && friend.user_first!=userId" style="color: #ff0000; font-size: 1.5em;"></i>
                 <i class="icon ion-checkmark-round" ng-if="friend.status==1" style="color: #43cee6; font-size: 1.5em;"></i>
-                <ion-delete-button class="ion-minus-circled" ion-stop-event="click" ng-click="onFriendDelete(friend);"></ion-delete-button>
+                <button class="button button-icon icon ion-reply" ng-if="friend.status==2 && friend.user_first!=userId" ion-stop-event="click" ng-click="friendshipDeal(friend)" style="color: #ff0000; font-size: 1em;top:0"></button>
+
+                <ion-delete-button class="ion-minus-circled" ion-stop-event="click" ng-click="onFriendDelete(friend);" style="top:0"></ion-delete-button>
             </ion-item>
         </ion-list>
     </ion-content>

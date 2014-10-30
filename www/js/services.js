@@ -19,17 +19,31 @@ angular.module('starter.services', ['ngResource'])
     /*
     * Service pour stocker le JSON reçu du serveur lors de la connexion d'un user
      */
-    .factory('globalJson', function() {
-        var globalJson;
+    .factory('Friendship', function($http, $q) {
 
-        return {
-            get: function() {
-                return globalJson;
-            },
-            set: function(json) {
-                globalJson = json;
-            }
-        }
+
+                var myService = {
+                    async: function(){
+                        var user = angular.fromJson(window.localStorage['user']);
+
+                        var promise = $http.post('http://eimk.tk/cinebook/public/friends/check', user )
+                            .success(function (data, status, headers, config) {
+                                console.log('json = ' +angular.toJson(data));
+                            })
+                            .error(function(data, status, headers, config){
+                                console.log('ERROR');
+                            }).then(function(data){
+                                console.log("myService = " +data.data.friendships);
+                                return data.data.friendships;
+                            });
+                        return promise;
+                    }
+                };
+
+
+
+                return myService;
+
     })
 
     /*
