@@ -78,7 +78,7 @@ angular.module('starter.controllers', [])
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     //var userInfos = angular.toJson(json);
-                    console.log("Error : " +json.error);
+                    //console.log("Error : " +json.error);
                     if(json.error == true) {
                         $scope.msgError = json;
                         /*$scope.showError= function() {
@@ -90,8 +90,9 @@ angular.module('starter.controllers', [])
                         });
                         $ionicLoading.hide();
                     }else{
-                        console.log("login = " + user);
+                        //console.log("Infos = " + angular.toJson(json));
                         window.localStorage['user'] = angular.toJson(user);
+                        window.localStorage['userId'] = json.user.id;
                         $ionicViewService.nextViewOptions({
                             disableAnimate: true,
                             disableBack: true
@@ -165,6 +166,9 @@ angular.module('starter.controllers', [])
 
         $ionicLoading.show();
         var user = angular.fromJson(window.localStorage['user']);
+        console.log("user = " +angular.toJson(user));
+        $scope.userId = window.localStorage['userId'];
+
         $http.post('http://eimk.tk/cinebook/public/friends', user )
             .success(function (data, status, headers, config) {
                 var json = angular.fromJson(data);
@@ -283,6 +287,16 @@ angular.module('starter.controllers', [])
 
         $scope.addFriend = function(friendId){
             console.log(friendId);
+            $http.post('http://eimk.tk/cinebook/public/friend/add/'+friendId, user )
+                .success(function (data, status, headers, config) {
+                    var json = angular.fromJson(data);
+                    console.log("search = " + angular.toJson(data));
+                    $scope.leaveAddDialog();
+                    $scope.refreshFriends();
+                })
+                .error(function(data, status, headers, config){
+                    console.log('ERROR');
+                });
         }
     })
 
