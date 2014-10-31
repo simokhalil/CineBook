@@ -38,11 +38,11 @@
                   </p>
               </div>
               <div class="item tabs tabs-secondary tabs-icon-left" style="background-color: #fff;">
-                  <a class="tab-item" ng-click="like(actu)" ng-if="actu.likes==0">
+                  <a class="tab-item" ng-click="like(actu)" ng-if="actu.can_like==true">
                       <i class="icon ion-thumbsup"></i>
                       J'aime
                   </a>
-                  <a class="tab-item" ng-if="actu.likes>0" ng-click="like(actu)" style="color: #0000ff">
+                  <a class="tab-item" ng-if="actu.can_like==false" ng-click="like(actu)" style="color: #0000ff">
                       <i class="icon ion-thumbsup"></i>
                       J'aime
                   </a>

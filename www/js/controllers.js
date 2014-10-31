@@ -79,21 +79,24 @@ angular.module('starter.controllers', [])
         }
 
         $scope.like = function(actu){
-            $http.post('http://eimk.tk/cinebook/public/post/like/'+actu.id, user )
-                .success(function (data, status, headers, config) {
-                    var json = angular.fromJson(data);
+            if(actu.can_like==true) {
+                $http.post('http://eimk.tk/cinebook/public/post/like/' + actu.id, user)
+                    .success(function (data, status, headers, config) {
+                        var json = angular.fromJson(data);
 
-                    if(json.error == true) {
-                        $scope.msgError = json;
-                    }else{
-                        var temp = parseInt(angular.fromJson(actu).likes) + 1;
-                        console.log(temp);
-                        actu.likes = temp;
-                    }
-                })
-                .error(function(data, status, headers, config){
-                    console.log('ERROR');
-                })
+                        if (json.error == true) {
+                            $scope.msgError = json;
+                        } else {
+                            var temp = parseInt(angular.fromJson(actu).likes) + 1;
+                            console.log(temp);
+                            actu.likes = temp;
+                            actu.can_like = false;
+                        }
+                    })
+                    .error(function (data, status, headers, config) {
+                        console.log('ERROR');
+                    })
+            }
         }
     })
 
