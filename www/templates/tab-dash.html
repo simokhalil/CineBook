@@ -2,14 +2,14 @@
     <ion-nav-bar align-title="center" class="bar bar-header bar-calm">
     </ion-nav-bar>
 
-  <ion-content>
+  <ion-content overflow-scroll="true>
       <ion-refresher
               on-refresh="refreshActus()">
       </ion-refresher>
 
       <!--<div style="position: fixed">-->
         <h3 class="titre"><i class="icon ion-ios7-film-outline" style="margin-right: 20px;"></i> Derniers films</h3>
-              <ion-scroll direction="x" scrollbar-x="false" class="wide-as-needed-horizontal" style="background: #fff; margin-bottom: 50px;">
+              <ion-scroll direction="x" scrollbar-x="false" delegate-handle="horizontal" class="wide-as-needed-horizontal" style="background: #fff; margin-bottom: 50px;">
                   <a href="#/tab/detailFilm/{{img.id}}" ng-repeat="img in imgs" class="button inline-button img-button film-list-item">
                       <img src="http://image.tmdb.org/t/p/w154/{{img.poster_path}}" class="film-list-item-image">
                       <div class="film-list-item-details">
