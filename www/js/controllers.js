@@ -1,5 +1,11 @@
 angular.module('starter.controllers', [])
 
+    .filter('breakFilter', function () {
+        return function (text) {
+            if (text !== undefined) return text.replace(/\n/g, '<br />');
+        };
+    })
+
     .controller('BodyCtrl', function($scope, Friendship) {
         var user = angular.fromJson(window.localStorage['user']);
         $scope.badge = {};
@@ -16,7 +22,7 @@ angular.module('starter.controllers', [])
     /*****************************************
      * DASH *
      *****************************************/
-    .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, Films, FilmsDisney) {
+    .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, $ionicModal, Films, FilmsDisney) {
         $ionicLoading.show();
         var user = angular.fromJson(window.localStorage['user']);
 
@@ -97,6 +103,80 @@ angular.module('starter.controllers', [])
                         console.log('ERROR');
                     })
             }
+        }
+
+        //Load comments modal template
+        $ionicModal.fromTemplateUrl('templates/comment-modal.html', function(modal) {
+            $scope.commentModal = modal;
+        }, {
+            scope: $scope,
+            animation: 'slide-in-up'
+        });
+
+        $scope.showComments = function(actu){
+            $scope.commentModal.show();
+            $ionicLoading.show();
+            $http.post('http://eimk.tk/cinebook/public/post/' + actu.id+'/comments', user)
+                .success(function (data, status, headers, config) {
+                    var json = angular.fromJson(data);
+                    $scope.comments = json.comments_list;
+                    $scope.actu = actu;
+                    $ionicLoading.hide();
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('ERROR');
+                    $ionicLoading.hide();
+                })
+        };
+
+        $scope.leaveComments = function() {
+            // Remove dialog
+            $scope.commentModal.remove();
+            // Reload modal template to have cleared form
+            $ionicModal.fromTemplateUrl('templates/comment-modal.html', function(modal) {
+                $scope.commentModal = modal;
+            }, {
+                scope: $scope,
+                animation: 'slide-in-up'
+            });
+        };
+
+        $scope.refreshComments = function(actu){
+            $ionicLoading.show();
+            $http.post('http://eimk.tk/cinebook/public/post/' + actu.id+'/comments', user)
+                .success(function (data, status, headers, config) {
+                    var json = angular.fromJson(data);
+                    $scope.comments = json.comments_list;
+                    $scope.actu = actu;
+                    $ionicLoading.hide();
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('ERROR');
+                    $ionicLoading.hide();
+                })
+        }
+
+        $scope.onComment = function(actu, comment){
+            var data = user;
+            data.comment = comment;
+            data.post_id = actu.id;
+            $http.post('http://eimk.tk/cinebook/public/post/' + actu.id+'/comments/add', data)
+                .success(function (data, status, headers, config) {
+                    var json = angular.fromJson(data);
+                    if(json.error == false) {
+                        $scope.clearCommentInput();
+                        $ionicLoading.hide();
+                        $scope.refreshComments(actu);
+                    }
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('ERROR');
+                    $ionicLoading.hide();
+                })
+        }
+
+        $scope.clearCommentInput = function(){
+            $scope.comment = '';
         }
     })
 

@@ -1,0 +1,31 @@
+<ion-modal-view>
+
+    <ion-header-bar class="bar-calm">
+        <ion-button class="button icon-left ion-chevron-left button-clear" ng-click="leaveComments()">Annuler</ion-button>
+        <h1 class="title">Ajouter un ami</h1>
+    </ion-header-bar>
+
+    <ion-content has-header="false">
+
+
+        <ion-list>
+            <ion-item class="item item-thumbnail-left" ng-repeat="comment in comments" type="item-text-wrap" style="background: #fff;">
+                    <img src="img/avatar.jpg" style="max-width: 50px;">
+                    <h2 style="margin: 0;font-weight: bold">{{comment.first_name}} {{comment.last_name}}</h2>
+                    <p><pre style="font-family: 'Lato' sans-serif; font-size: 0.8em;">{{comment.content}}</pre></p>
+            </ion-item>
+        </ion-list>
+
+
+
+    </ion-content>
+
+    <ion-footer-bar class="bar bar-clear item-input-inset" style="border-top: 1px solid #dddddd">
+        <label class="item-input-wrapper" style="background: #fff;">
+            <!--<input type="text" placeholder="Ton commentaire..." ng-model="newComment">-->
+            <textarea placeholder="Ton commentaire..." ng-model="comment" autofocus></textarea>
+        </label>
+        <button class="button button-calm" ng-click="onComment(actu, comment);">Envoyer</button>
+    </ion-footer-bar>
+
+</ion-modal-view>

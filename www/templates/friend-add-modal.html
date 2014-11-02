@@ -1,6 +1,6 @@
 <ion-modal-view>
 
-    <ion-header-bar class="bar-dark">
+    <ion-header-bar class="bar-calm">
         <ion-button class="button icon-left ion-chevron-left button-clear" ng-click="leaveAddDialog()">Annuler</ion-button>
         <h1 class="title">Ajouter un ami</h1>
     </ion-header-bar>
@@ -10,7 +10,7 @@
             <div class="list">
                 <div class="item item-input-inset">
                     <label class="item-input-wrapper" style="background: #fff;">
-                        <input type="text" placeholder="Rechercher" ng-model="friendQuery">
+                        <input type="text" placeholder="Rechercher" ng-model="friendQuery" autofocus>
                     </label>
                     <button class="button button-small icon ion-search button-dark" ng-click="searchFriend(friendQuery);"></button>
                 </div>

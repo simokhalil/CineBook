@@ -269,8 +269,9 @@ h4, .h4, h5, .h5, h6, .h6{
     padding: 8px 49px 8px 5px;
 }
 
-.bar-actions {
-
+.item-thumbnail-left, .item-thumbnail-left .item-content{
+    padding-left: 70px;
+    min-height: 70px;
 }
 
 /*
