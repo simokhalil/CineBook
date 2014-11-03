@@ -1,11 +1,5 @@
 angular.module('starter.controllers', [])
 
-    .filter('breakFilter', function () {
-        return function (text) {
-            if (text !== undefined) return text.replace(/\n/g, '<br />');
-        };
-    })
-
     .controller('BodyCtrl', function($scope, Friendship) {
         var user = angular.fromJson(window.localStorage['user']);
         $scope.badge = {};
@@ -22,7 +16,9 @@ angular.module('starter.controllers', [])
     /*****************************************
      * DASH *
      *****************************************/
-    .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, $ionicModal, Films, FilmsDisney) {
+    .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, $ionicModal,ScrollFix, Films, FilmsDisney) {
+        //ScrollFix.fix();
+
         $ionicLoading.show();
         var user = angular.fromJson(window.localStorage['user']);
 
@@ -243,7 +239,7 @@ angular.module('starter.controllers', [])
         $ionicLoading.show();
         detailFilm.get($stateParams, function (data) {
             var json = angular.fromJson(data);
-            console.log("json= "+ data);
+            console.log("json= "+ angular.toJson(data));
             $scope.data= json;
 
             /************** Genres ****************/
@@ -272,7 +268,11 @@ angular.module('starter.controllers', [])
             var json = angular.fromJson(data);
             $scope.video=angular.fromJson(json.results[0]);
             $ionicLoading.hide();
-        })
+        });
+
+        $scope.shareFilm = function(){
+            console.log(angular.toJson($scope.data));
+        }
     })
 
     /*****************************************
@@ -310,7 +310,6 @@ angular.module('starter.controllers', [])
 
         Friendship.async().then(function(d) {
             $scope.badge.friend = d;
-            console.log("Friendship = " +angular.toJson($scope.badge.friend) );
         });
 
         $scope.refreshFriends = function(){
@@ -330,7 +329,6 @@ angular.module('starter.controllers', [])
                 .finally(function(){
                     Friendship.async().then(function(d) {
                         $scope.badge.friend = d;
-                        console.log("Friendship = " +angular.toJson($scope.badge.friend) );
                     });
                     $scope.$broadcast('scroll.refreshComplete');
                 });
