@@ -241,7 +241,23 @@ angular.module('starter.controllers', [])
             var json = angular.fromJson(data);
             console.log("json= "+ angular.toJson(data));
             $scope.data= json;
+            var i=0;
+            var nb_mot=0;
+            var littleoverview="";
+            while(nb_mot<30 && i<data.overview.length)
+            {
 
+                if(data.overview[i]==' ')
+                {
+                    nb_mot++;
+
+                }
+                console.log("lo=",littleoverview);
+                littleoverview+=data.overview[i];
+                i++;
+            }
+                littleoverview=littleoverview+" ...";
+            $scope.lo=littleoverview;
             /************** Genres ****************/
             var genres = angular.fromJson(json.genres);
             console.log(json.genres.length);
@@ -294,6 +310,7 @@ angular.module('starter.controllers', [])
         };
         $scope.shareFilm = function(){
             $scope.showShareDialog();
+
         }
     })
 
@@ -557,6 +574,7 @@ angular.module('starter.controllers', [])
 
         var result;
         var overviews = new Array();
+
         Films.get({id:16}, function(data) {
             var json = angular.fromJson(data);
 
@@ -573,6 +591,7 @@ angular.module('starter.controllers', [])
                 });
 
             }
+
 
             $scope.overviews = overviews;
         });

@@ -2,30 +2,31 @@
 
     <ion-header-bar class="bar-calm">
         <ion-button class="button icon-left ion-chevron-left button-clear" ng-click="leaveShareDialog()">Annuler</ion-button>
-        <h1 class="title">Ajouter un ami</h1>
+        <h1 class="title">Partager un film</h1>
     </ion-header-bar>
 
     <ion-content has-header="false">
+        <label class="item item-input">
+            <input type="text" placeholder="Dites quelque chose à propos de ce film" >
+        </label>
+        <div style="border:1px solid #43cee6;margin:5px;padding:10px;">
 
+    <img src="http://image.tmdb.org/t/p/w500/{{data.backdrop_path}}" style="width:100%;display:block;">
 
-        <ion-list>
-            <ion-item class="item item-thumbnail-left" ng-repeat="comment in comments" type="item-text-wrap" style="background: #fff;">
-                    <img src="img/avatar.jpg" style="max-width: 50px;">
-                    <h2 style="margin: 0;font-weight: bold">{{comment.first_name}} {{comment.last_name}}</h2>
-                    <p><pre style="font-family: 'Lato' sans-serif; font-size: 0.8em;">{{comment.content}}</pre></p>
-            </ion-item>
-        </ion-list>
+        <div  style="margin-left: 10px;margin-right: 10px;text-align:justify;" >
 
+            <span class="detail-film-date" style="text-align: left;font-size: 15px;line-height:100%;"> {{data.title}}</span>
+        </div>
+        <div style="font-size:0.8em;padding-left:10px;border-left:2px solid #c0c0c0;margin-top:10px; margin-left: 10px;margin-right: 10px;text-align:justify;color:#8B8B8B;">
+            {{lo}}
 
-
+        </div>
+        </div>
     </ion-content>
 
     <ion-footer-bar class="bar bar-clear item-input-inset" style="border-top: 1px solid #dddddd">
-        <label class="item-input-wrapper" style="background: #fff;">
-            <!--<input type="text" placeholder="Ton commentaire..." ng-model="newComment">-->
-            <textarea placeholder="Ton commentaire..." ng-model="comment" autofocus></textarea>
-        </label>
-        <button class="button button-calm" ng-click="onShare(data, comment);">Envoyer</button>
+
+        <button class="button button-calm" ng-click="onShare(data, comment);" style="width:100%;display:block;">Envoyer</button>
     </ion-footer-bar>
 
 </ion-modal-view>
