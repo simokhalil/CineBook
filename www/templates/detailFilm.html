@@ -16,12 +16,12 @@
                 <span class="detail-film-genres"> {{genres}}</span>
                 <span style="display:block;text-align: center;font-family: 'Fugaz One', cursive;">date de sortie</span>
                 <span class="detail-film-date"> {{release_date}}</span>
-                <button ng-click="shareFilm()" class="button button-small icon-left ion-share button-positive">Partager</button>
+
             </div>
         </div>
 
         <div style="clear:both;"></div>
-
+        <button style=" width: 96%; margin-left: 2%; margin-bottom: 10px" ng-click="shareFilm()" class="button ion-share button-balanced"> Partager</button>
         <h3 class="detail-film-section">Synopsis</h3>
         <div style="margin-left: 10px;margin-right: 10px;text-align:justify;">
             {{data.overview}}
