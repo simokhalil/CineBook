@@ -231,7 +231,7 @@ angular.module('starter.controllers', [])
     /*****************************************
      * FILM DETAILS *
      *****************************************/
-    .controller('DetailFilmCtrl', function($scope, $stateParams, $ionicLoading, $ionicViewService, detailFilm, videoFilm){
+    .controller('DetailFilmCtrl', function($scope, $stateParams, $ionicLoading, $ionicViewService, $ionicModal, detailFilm, videoFilm){
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
@@ -270,8 +270,30 @@ angular.module('starter.controllers', [])
             $ionicLoading.hide();
         });
 
+        // Load the add / change dialog from the given template URL
+        $ionicModal.fromTemplateUrl('templates/share-modal.html', function(modal) {
+            $scope.shareDialog = modal;
+        }, {
+            scope: $scope,
+            animation: 'slide-in-up'
+        });
+
+        $scope.showShareDialog = function(){
+            $scope.shareDialog.show();
+        };
+        $scope.leaveShareDialog = function() {
+            // Remove dialog
+            $scope.shareDialog.remove();
+            // Reload modal template to have cleared form
+            $ionicModal.fromTemplateUrl('templates/share-modal.html', function(modal) {
+                $scope.shareDialog = modal;
+            }, {
+                scope: $scope,
+                animation: 'slide-in-up'
+            });
+        };
         $scope.shareFilm = function(){
-            console.log(angular.toJson($scope.data));
+            $scope.showShareDialog();
         }
     })
 
@@ -465,6 +487,8 @@ angular.module('starter.controllers', [])
                 });
             });
         }
+
+
     })
 
 
