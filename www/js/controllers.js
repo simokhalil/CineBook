@@ -106,7 +106,8 @@ angular.module('starter.controllers', [])
             $scope.commentModal = modal;
         }, {
             scope: $scope,
-            animation: 'slide-in-up'
+            animation: 'slide-in-up',
+            focusFirstInput: true
         });
 
         $scope.showComments = function(actu){
@@ -231,7 +232,7 @@ angular.module('starter.controllers', [])
     /*****************************************
      * FILM DETAILS *
      *****************************************/
-    .controller('DetailFilmCtrl', function($scope, $stateParams, $ionicLoading, $ionicViewService, $ionicModal, detailFilm, videoFilm){
+    .controller('DetailFilmCtrl', function($scope, $stateParams, $http, $ionicLoading, $ionicViewService, $ionicModal, detailFilm, videoFilm){
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
@@ -286,12 +287,13 @@ angular.module('starter.controllers', [])
             $ionicLoading.hide();
         });
 
-        // Load the add / change dialog from the given template URL
+        // Load the Share dialog from the given template URL
         $ionicModal.fromTemplateUrl('templates/share-modal.html', function(modal) {
             $scope.shareDialog = modal;
         }, {
             scope: $scope,
-            animation: 'slide-in-up'
+            animation: 'slide-in-up',
+            focusFirstInput: true
         });
 
         $scope.showShareDialog = function(){
@@ -311,7 +313,34 @@ angular.module('starter.controllers', [])
         $scope.shareFilm = function(){
             $scope.showShareDialog();
 
-        }
+        };
+
+        $scope.onShare = function(){
+            var user = angular.fromJson(window.localStorage['user']);
+
+            var img = $scope.data.backdrop_path;
+            var synopsys = $scope.lo;
+            var title = $scope.data.title;
+            var content = $scope.data.comment;
+
+            var data = user;
+            data.img = img;
+            data.overview = synopsys;
+            data.title = title;
+            data.content = content;
+
+            $http.post('http://eimk.tk/cinebook/public/posts/add', data )
+                .success(function (data, status, headers, config) {
+                    console.log('Response = ' +data);
+                    var json = angular.fromJson(data);
+                    if(data.error == false){
+                        $scope.leaveShareDialog();
+                    }
+                })
+                .error(function(data, status, headers, config){
+                    console.log('ERROR');
+                });
+        };
     })
 
     /*****************************************

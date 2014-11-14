@@ -28,12 +28,16 @@
           <div ng-repeat="actu in userInfos.posts" class="list card">
               <div class="item item-avatar" style="border-bottom: 0;">
                   <img src="img/avatar.jpg">
-                  <h2 class="actu-h2"><strong>{{actu.first_name}} {{actu.last_name}}</strong></h2>
+                  <h2 class="actu-h2"><strong>{{actu.first_name}} {{actu.last_name}}</strong> a partagé ceci:</h2>
                   <p style="font-size: 0.6em;">{{actu.created_at}}</p>
               </div>
               <div class="item item-body" style="padding: 10px 10px 10px 10px; border-top: 0;">
-                  <img class="full-image" src="img/film.jpg">
-                  <p style="margin-top: 10px;">{{actu.content}}</p>
+                  <p style="margin-top: 5px;">{{actu.content}}</p>
+                  <div style="border:1px solid #505050;padding:5px;">
+                      <p style="font-weight: bold; margin-top:0;">{{actu.title}}</p>
+                      <img class="full-image" src="http://image.tmdb.org/t/p/w500/{{actu.img}}">
+                      <p style="font-weight: bold;">{{actu.overview}}</p>
+                  </div>
                   <p>
                       <a href="#" class="subdued" style="color: #528CE0; font-size: 0.8em;">{{actu.likes}} J'aime</a>
                       <a href="#" class="subdued" style="color: #528CE0; font-size: 0.8em;">{{actu.comments}} Commentaires</a>
