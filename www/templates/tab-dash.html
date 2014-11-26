@@ -1,5 +1,5 @@
 <ion-view title="Accueil">
-    <ion-nav-bar align-title="center" class="bar bar-header bar-calm">
+    <ion-nav-bar align-title="center" id="header" class="bar bar-header bar-calm">
     </ion-nav-bar>
 
   <ion-content>
@@ -8,8 +8,10 @@
       </ion-refresher>
 
       <!--<div style="position: fixed">-->
+
         <h3 class="titre"><i class="icon ion-ios7-film-outline" style="margin-right: 20px;"></i> Derniers films</h3>
-              <ion-scroll direction="x" scrollbar-x="false" delegate-handle="horizontal" class="wide-as-needed-horizontal" style="background: #fff; margin-bottom: 50px;">
+      <div class="container">
+              <ion-scroll direction="x" scrollbar-x="false" delegate-handle="horizontal" class="wide-as-needed-horizontal">
                   <a href="#/tab/detailFilm/{{img.id}}" ng-repeat="img in imgs" class="button inline-button img-button film-list-item">
                       <img src="http://image.tmdb.org/t/p/w154/{{img.poster_path}}" class="film-list-item-image">
                       <div class="film-list-item-details">
@@ -19,12 +21,13 @@
                       </div>
                   </a>
               </ion-scroll>
+      </div>
       <!--</div>-->
 
       <h3 class="titre"><i class="icon ion-grid" style="margin-right: 20px"></i> Actualités</h3>
 
-          <div ng-repeat="actu in userInfos.posts" class="list card">
-              <div class="item item-avatar" style="border-bottom: 0;">
+          <div ng-repeat="actu in userInfos.posts" class="list card actu-container">
+              <div class="item item-avatar" style="border-bottom: 0;border-radius: 15px 15px 0 0;">
                   <img src="img/avatar.jpg">
                   <h2 class="actu-h2"><strong>{{actu.first_name}} {{actu.last_name}}</strong> a partagé ceci:</h2>
                   <p style="font-size: 0.6em;">{{actu.created_at}}</p>
@@ -32,9 +35,9 @@
               <div class="item item-body" style="padding: 10px 10px 10px 10px; border-top: 0;">
                   <p style="margin-top: 5px;">{{actu.content}}</p>
                   <div style="border:1px solid #505050;padding:5px;">
-                      <p style="font-weight: bold; margin-top:0;">{{actu.title}}</p>
+                      <p style="font-family:'Lato';font-weight: bold; margin-top:0;text-align: center;">{{actu.title}}</p>
                       <img class="full-image" src="http://image.tmdb.org/t/p/w500/{{actu.img}}">
-                      <p style="font-weight: bold;">{{actu.overview}}</p>
+                      <p>{{actu.overview}}</p>
                   </div>
                   <p>
                       <a href="#" class="subdued" style="color: #528CE0; font-size: 0.8em;">{{actu.likes}} J'aime</a>
@@ -46,7 +49,7 @@
                       <i class="icon ion-thumbsup"></i>
                       J'aime
                   </a>
-                  <a class="tab-item" ng-if="actu.can_like==false" ng-click="like(actu)" style="color: #0000ff">
+                  <a class="tab-item" ng-if="actu.can_like==false" ng-click="like(actu)" style="color: #f8e45b">
                       <i class="icon ion-thumbsup"></i>
                       J'aime
                   </a>

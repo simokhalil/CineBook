@@ -5,6 +5,19 @@
 @import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
 @import url(http://fonts.googleapis.com/css?family=Fugaz+One);
 
+@font-face {
+    font-family: 'waltographregular';
+    src: url('fonts/waltograph42-webfont.eot');
+    src: url('fonts/waltograph42-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/waltograph42-webfont.woff') format('woff'),
+    url('fonts/waltograph42-webfont.ttf') format('truetype'),
+    url('fonts/waltograph42-webfont.svg#waltographregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 /* Empty. Add your own CSS if you like */
 .wide-as-needed-horizontal {
 
@@ -137,8 +150,13 @@
 }
 
 ion-content{
-    background-color: #ffffff;
+    /*background-color: #f0b840;*/
 }
+
+ion-view{
+    background: url("../img/back-body.png") repeat-x;
+}
+
 
 .paragraph-end {
     background-image: -webkit-gradient(linear,left top,right top,color-stop(0%,rgba(0,0,0,0)),color-stop(100%,rgba(0,0,0,1)));
@@ -256,13 +274,19 @@ h4, .h4, h5, .h5, h6, .h6{
 }
 
 .titre {
-    font-family: 'Lato', sans-serif;
-    color: #43cee6;
+    font-family: 'waltographregular', sans-serif;
+    /*color: #43cee6;*/
+    color: #000000;
     padding: 0 25px 25px 25px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    font-size: 2.5em;
 }
 
 .title, .tab-title, .button-calm{
-    font-family: 'Fugaz One', cursive;
+    /*font-family: 'Fugaz One', cursive; */
+    font-family: 'waltographregular', cursive;
+    font-size: 2em;
 }
 
 
@@ -275,6 +299,62 @@ h4, .h4, h5, .h5, h6, .h6{
     min-height: 70px;
 }
 
+
+#header{
+    background: url("../img/back-header.png") repeat-x;
+    background-size: auto 100%;
+    width: 100%;
+    font-family: 'waltographregular';
+    font-weight: bold;
+    font-size: 4em;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+.bar .title{
+    font-size: 1em;
+}
+
+h3:first-child{
+    margin-top: 30px;
+}
+
+.tabs{
+    background: #631802;
+    background: -moz-linear-gradient(top, #631802 0%, #230700 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#631802), color-stop(100%,#230700));
+    background: -webkit-linear-gradient(top, #631802 0%,#230700 100%);
+    background: -o-linear-gradient(top, #631802 0%,#230700 100%);
+    background: -ms-linear-gradient(top, #631802 0%,#230700 100%);
+    background: linear-gradient(to bottom, #631802 0%,#230700 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#631802', endColorstr='#230700',GradientType=0 );
+    color: #ffffff;
+}
+
+.tabs:before{
+    content: '';
+    height: 11px;
+    background: url("../img/back-footer.png") repeat-x;
+}
+
+.container{
+    background: #f5f2ed;
+    padding: 10px 0px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 1px 5px #999999;
+    border-radius: 15px;
+}
+
+.actu-container{
+    background: #f5f2ed;
+    border: 3px solid #ffffff;
+    box-shadow: 0 1px 5px #999999;
+    border-radius: 15px 15px 0 0;
+}
+
+.actu-h2{
+    font-family: 'Fugaz One', cursive;;
+}
 /*
 h2{
     font-family: 'Fugaz One', cursive;
