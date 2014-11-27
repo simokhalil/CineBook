@@ -1,6 +1,6 @@
 <ion-view title="Amis">
 
-    <ion-nav-bar align-title="center" class="bar-calm">
+    <ion-nav-bar align-title="center" id="header" class="bar-calm">
         <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
             Back
         </ion-nav-back-button>
@@ -26,11 +26,12 @@
                 on-refresh="refreshFriends()">
         </ion-refresher>
 
+        <div style="height:20px;"></div>
         <div id="search-box" class="bar bar-header item-input padding bar-calm">
             <div class="item-input-wrapper">
-                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <i class="icon ion-ios7-search placeholder-icon search-icon"></i>
                 <input type="search" placeholder="Rechercher par nom, email,..." ng-model="data.searchQuery">
-                <i class="clear-search icon ion-ios7-close-outline" ng-click="clearSearch()"></i>
+                <i class="clear-search icon ion-ios7-close-outline search-icon" ng-click="clearSearch()"></i>
             </div>
         </div>
         <ion-list show-delete="data.showDelete">

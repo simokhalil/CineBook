@@ -304,15 +304,18 @@ h4, .h4, h5, .h5, h6, .h6{
     background: url("../img/back-header.png") repeat-x;
     background-size: auto 100%;
     width: 100%;
+    height: 60px;
     font-family: 'waltographregular';
     font-weight: bold;
     font-size: 4em;
-    margin-bottom: 30px;
-    padding: 30px;
+    margin-bottom: 25px;
+    padding-top: 0;
 }
 
 .bar .title{
     font-size: 1em;
+    margin-top: 5px;
+    padding-top: 2px;
 }
 
 h3:first-child{
@@ -320,6 +323,18 @@ h3:first-child{
 }
 
 .tabs{
+    background: #631802;
+    background: -moz-linear-gradient(top, #631802 0%, #230700 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#631802), color-stop(100%,#230700));
+    background: -webkit-linear-gradient(top, #631802 0%,#230700 100%);
+    background: -o-linear-gradient(top, #631802 0%,#230700 100%);
+    background: -ms-linear-gradient(top, #631802 0%,#230700 100%);
+    background: linear-gradient(to bottom, #631802 0%,#230700 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#631802', endColorstr='#230700',GradientType=0 );
+    color: #ffffff;
+}
+
+.tabs-striped.tabs-background-dark .tabs{
     background: #631802;
     background: -moz-linear-gradient(top, #631802 0%, #230700 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#631802), color-stop(100%,#230700));
@@ -352,8 +367,79 @@ h3:first-child{
     border-radius: 15px 15px 0 0;
 }
 
+.left-buttons{
+    position: absolute;
+    top: 10px;
+    left: 5px;
+}
+
 .actu-h2{
     font-family: 'Fugaz One', cursive;;
+}
+
+#search-box{
+    width: 80%;
+    margin: 20px auto 20px auto;
+    padding: 0;
+    border: 3px solid #ffffff;
+    box-shadow: 0 1px 5px #999999;
+    border-radius: 30px;
+    background: #ffffff;
+}
+
+.search-icon{
+    color: #808080;
+}
+
+.cinema-element{
+    margin: 15px 0;
+    background: #f5f2ed;
+    border: 3px solid #ffffff;
+    box-shadow: 0 1px 5px #999999;
+    padding: 0;
+}
+
+.item-thumbnail-left > img:first-child{
+    position: relative;
+    top: 0;
+    float: left;
+    max-height: 120px;
+    margin: 5px 0;
+}
+
+.cinema-title{
+    position: absolute;
+    top: 15px;
+    left: 100px;
+    font-family: 'Fugaz One';
+    white-space: normal !important;
+}
+
+.cinema-overview{
+    display: block;
+    position: absolute;
+    width: 93%;
+    top: 50px;
+    left: 100px;
+    font-family: 'Lato';
+    white-space: nowrap;
+}
+
+.cinema-paragraph-end {
+    background-image: -webkit-gradient(linear,left top,right top,color-stop(0%,rgba(245,242,237,0.2)),color-stop(100%,rgba(245,242,237,0.2)));
+    background-image: -webkit-linear-gradient(left,rgba(245,242,237,0.2),rgba(245, 242, 237, 1));
+    background-image: -moz-linear-gradient(left,rgba(245,242,237,0.2),rgba(245, 242, 237, 1));
+    background-image: -ms-linear-gradient(left,rgba(245,242,237,0.2),rgba(245, 242, 237, 1));
+    background-image: -o-linear-gradient(left,rgba(245,242,237,0.2),rgba(245, 242, 237, 1));
+    background: linear-gradient(to right,rgba(245,242,237,0.2),rgba(245, 242, 237, 1));
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#f5f2ed00',EndColorStr='#f5f2edff');
+    top: 50px;
+    height: 18px;
+    max-height: 100%;
+    position: absolute;
+    right: 0;
+    width: 35px;
+    z-index: 99;
 }
 /*
 h2{

@@ -1,16 +1,18 @@
 <ion-view title="Cinema">
-    <ion-nav-bar align-title="center" class="bar-calm">
+    <ion-nav-bar align-title="center" id="header" class="bar-calm">
         <h1 class="title">Cinema</h1>
     </ion-nav-bar>
   <ion-content class="padding" >
 
       <div class="list">
-          <a  href="#/tab/detailFilm/{{overview.id}}" ng-repeat="overview in overviews"  class="item item-thumbnail-left" href="#">
+          <a  href="#/tab/detailFilm/{{overview.id}}" ng-repeat="overview in overviews"  class="item item-thumbnail-left cinema-element" href="#">
 
               <img src="http://image.tmdb.org/t/p/w92/{{overview.poster_path}}">
-              <h2>{{overview.title}}</h2>
-              <p>{{overview.overview}}
-                  <span class="paragraph-end"></span></p>
+              <h2 class="cinema-title">{{overview.title}}</h2>
+              <p class="cinema-overview">{{overview.overview}}
+
+              </p>
+              <span class="cinema-paragraph-end"></span>
           </a>
 
 

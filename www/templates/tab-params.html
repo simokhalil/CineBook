@@ -1,16 +1,16 @@
 <ion-view title="Paramètres">
-    <ion-nav-bar align-title="center" class="bar-calm">
+    <ion-nav-bar align-title="center" id="header" class="bar-calm">
         <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
             Retour
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content class="padding" style="font-family: 'Lato' sans-serif;">
 
-        <p style="text-align: center;">
+        <p style="text-align: center;margin-top: 20px;">
             Connecté en tant que
-            <span style="display: block; color:#43cee6; font-size: 3em; margin:10px 0 60px 0; font-weight: 300;">{{user.first_name}} {{user.last_name}}</span>
+            <span style="display: block; color:#000000; font-size: 3em; margin:10px 0 60px 0; font-weight: 300;">{{user.first_name}} {{user.last_name}}</span>
         </p>
 
-            <button class="button button-block button-assertive" ng-click="logout()"><i class="icon ion-power" style="margin-right: 15px;"></i> Se déconnecter</button>
+            <button class="button button-block button-assertive" style="border-radius: 25px;" ng-click="logout()"><i class="icon ion-power" style="margin-right: 15px;"></i> Se déconnecter</button>
     </ion-content>
 </ion-view>
