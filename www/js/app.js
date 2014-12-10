@@ -103,6 +103,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 }
             })
 
+            .state('tab.detailFilmCine', {
+                url: '/detailFilmCine/:idFilm',
+                views: {
+                    'tab-cinema': {
+                        templateUrl: "templates/detailFilm.html",
+                        controller: 'DetailFilmCtrl'
+                    }
+                }
+            })
+
             /*.state('tab.search', {
                 url: '/search',
                 views: {

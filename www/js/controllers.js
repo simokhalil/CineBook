@@ -571,17 +571,30 @@ angular.module('starter.controllers', [])
     /*****************************************
      * PARAMETERS *
      *****************************************/
-    .controller('ParamsCtrl', function($scope, $state, $ionicViewService) {
+    .controller('ParamsCtrl', function($scope, $state, $ionicViewService, Cam) {
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
         });
 
         $scope.user = angular.fromJson(window.localStorage['userInfos']).user;
-            $scope.logout = function(){
-                window.localStorage.clear();
-                $state.go('signin');
-            };
+        $scope.logout = function(){
+            window.localStorage.clear();
+            $state.go('signin');
+        };
+
+
+        $scope.getImage = function() {
+            console.log('Getting camera');
+            Cam.getPicture().then(function(imageURI) {
+                console.log(imageURI);
+                $scope.lastPhoto = imageURI;
+            }, function(err) {
+                console.err(err);
+            }, {
+                sourceType : navigator.camera.PictureSourceType.PHOTOLIBRARY
+            });
+        }
     })
 
 

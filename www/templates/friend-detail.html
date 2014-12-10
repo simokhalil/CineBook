@@ -6,7 +6,7 @@
 -->
 <ion-view title="{{friend.first_name}} {{friend.last_name}}">
 
-    <ion-nav-bar align-title="center" class="bar-calm">
+    <ion-nav-bar align-title="center" id="header" class="bar-calm">
         <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
             Retour
         </ion-nav-back-button>
@@ -16,7 +16,7 @@
         <ion-refresher
                 on-refresh="refreshFriends()">
         </ion-refresher>
-
+        <div style="height:20px;"></div>
         <div class="friend-identity">
 
             <table style="text-align: center; margin: 10px; width: 100%; font-family: 'Lato' sans-serif; color: #898989">
@@ -33,12 +33,12 @@
 
         <div style="display:block;
                     margin: 20px 0;
-                    background: #43cee6;
+                    background: #f5f2ed;
                     height: 40px;
                     text-align: center;
                     line-height: 40px;
-                    font-family: 'Lato' sans-serif;
-                    color: #fff;">
+                    font-family: 'Fugaz One';
+                    color: #383c3f;">
             Actualités
         </div>
 
