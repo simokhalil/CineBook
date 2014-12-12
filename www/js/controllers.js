@@ -64,8 +64,10 @@ angular.module('starter.controllers', [])
             /* Envoi et traitement de la requête au serveur */
             $http.post('http://cinebook-project.tk/userInfos', user )
                 .success(function (data, status, headers, config) {
+
                     var json = angular.fromJson(data);
                     var userInfos = angular.toJson(json);
+                    console.log(userInfos);
                     if(json.error == true) {
                         $scope.msgError = json;
                     }else{

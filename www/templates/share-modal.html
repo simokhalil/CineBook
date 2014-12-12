@@ -1,12 +1,12 @@
 <ion-modal-view>
 
-    <ion-header-bar class="bar-calm">
+    <ion-header-bar class="bar-calm" id="header">
         <ion-button class="button icon-left ion-chevron-left button-clear" ng-click="leaveShareDialog()">Annuler</ion-button>
         <h1 class="title">Partager un film</h1>
     </ion-header-bar>
 
     <ion-content has-header="false">
-        <label class="item item-input">
+        <label class="item item-input" style="margin-top: 20px;">
             <input type="text" placeholder="Dites quelque chose à propos de ce film" ng-model="data.comment" >
         </label>
         <div style="border:1px solid #43cee6;margin:5px;padding:10px;">
@@ -26,7 +26,7 @@
 
     <ion-footer-bar class="bar bar-clear item-input-inset" style="border-top: 1px solid #dddddd">
 
-        <button class="button button-calm" ng-click="onShare(data, comment);" style="width:100%;display:block;">Envoyer</button>
+        <button class="button button-calm login-button" ng-click="onShare(data, comment);" style="width:100%;display:block;">Envoyer</button>
     </ion-footer-bar>
 
 </ion-modal-view>
