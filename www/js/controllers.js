@@ -17,19 +17,27 @@ angular.module('starter.controllers', [])
      * DASH *
      *****************************************/
     .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, $ionicModal,ScrollFix, Films, FilmsDisney) {
-        //ScrollFix.fix();
+        /* Service permettant le scroll vertical sur un scroll horizontal (liste des films dans le Dashboard)*/
+        ScrollFix.fix();
 
+        /* Afficher l'icone de chargement */
         $ionicLoading.show();
+
+        /* Récupération des identifiants de l'utilisateur dans le localStorage */
         var user = angular.fromJson(window.localStorage['user']);
 
+        /* Envoi + traitement de la requête au serveur pour avoir les données de l'utiliateur */
         $http.post('http://cinebook-project.tk/userInfos', user )
             .success(function (data, status, headers, config) {
+                /* Convertir la réponse en JSON  et extraction des données de l'utilisateur */
                 var json = angular.fromJson(data);
                 var userInfos = angular.toJson(json);
+
+                /* Gestion des erreurs rapportées le serveur */
                 if(json.error == true) {
                     $scope.msgError = json;
                 }else{
-                    console.log("login = " + angular.toJson(user));
+                    /* Si tout va bien, enregistrer les données de l'utilisateur dans le localStorage */
                     window.localStorage['userInfos'] = userInfos;
                     $scope.userInfos = angular.fromJson(window.localStorage['userInfos']);
                 }
@@ -41,15 +49,7 @@ angular.module('starter.controllers', [])
                 $ionicLoading.hide();
             });
 
-        /*Films.get({id:16}, function(data){
-            var json = angular.fromJson(data);
-            console.log("json = " + angular.toJson(data));
-            var imgs = angular.fromJson(json.results);
-            $scope.imgs = imgs;
-            console.log("imgs = " +imgs);
-        });*/
-
-
+        /* Récupération des fimms Disney à mettre en avant en utilisant le service FilmsDisney*/
         FilmsDisney.get({id:'51224e42760ee3297424a1e0'}, function(data){
             var json = angular.fromJson(data);
             console.log("json = " + angular.toJson(data));
@@ -59,7 +59,9 @@ angular.module('starter.controllers', [])
         });
 
 
+        /* Action de réactualisation des données du Dashboard suite au PullToRefresh */
         $scope.refreshActus = function(){
+            /* Envoi et traitement de la requête au serveur */
             $http.post('http://cinebook-project.tk/userInfos', user )
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
@@ -80,8 +82,11 @@ angular.module('starter.controllers', [])
                 });
         }
 
+        /* Quand l'utilisateur clique sur "J'aime" dans un post */
         $scope.like = function(actu){
+            /* S'il peut aimer */
             if(actu.can_like==true) {
+                /* Envoi de la requête au serveur */
                 $http.post('http://cinebook-project.tk/post/like/' + actu.id, user)
                     .success(function (data, status, headers, config) {
                         var json = angular.fromJson(data);
@@ -92,7 +97,7 @@ angular.module('starter.controllers', [])
                             var temp = parseInt(angular.fromJson(actu).likes) + 1;
                             console.log(temp);
                             actu.likes = temp;
-                            actu.can_like = false;
+                            actu.can_like = false; //Définit l'utilisateur comme ne pouvant plus "Aimer" le post en question
                         }
                     })
                     .error(function (data, status, headers, config) {
@@ -101,7 +106,7 @@ angular.module('starter.controllers', [])
             }
         }
 
-        //Load comments modal template
+        /* Modal pour Charger les commentaires */
         $ionicModal.fromTemplateUrl('templates/comment-modal.html', function(modal) {
             $scope.commentModal = modal;
         }, {
@@ -110,12 +115,15 @@ angular.module('starter.controllers', [])
             focusFirstInput: true
         });
 
+        /* Afficher les commentaires */
         $scope.showComments = function(actu){
             $scope.commentModal.show();
             $ionicLoading.show();
+            /* Envoi et traitement de la requête au serveur */
             $http.post('http://cinebook-project.tk/post/' + actu.id+'/comments', user)
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
+                    /* Extraction des commentaires depuis le JSON reçu */
                     $scope.comments = json.comments_list;
                     $scope.actu = actu;
                     $ionicLoading.hide();
@@ -126,10 +134,11 @@ angular.module('starter.controllers', [])
                 })
         };
 
+        /* Fermer la fenêtre des commentaires */
         $scope.leaveComments = function() {
-            // Remove dialog
+            // Supprimer la modal
             $scope.commentModal.remove();
-            // Reload modal template to have cleared form
+            // Recharger la modal pour qu'elle soit de nouveau disponible à être chargée
             $ionicModal.fromTemplateUrl('templates/comment-modal.html', function(modal) {
                 $scope.commentModal = modal;
             }, {
@@ -138,6 +147,7 @@ angular.module('starter.controllers', [])
             });
         };
 
+        /* Raffraîchir la liste des commentaires suite à un PullToRefresh */
         $scope.refreshComments = function(actu){
             $ionicLoading.show();
             $http.post('http://cinebook-project.tk/post/' + actu.id+'/comments', user)
@@ -153,6 +163,7 @@ angular.module('starter.controllers', [])
                 })
         }
 
+        /* Quand l'utilisateur poste un commentaire */
         $scope.onComment = function(actu, comment){
             var data = user;
             data.comment = comment;
@@ -172,6 +183,7 @@ angular.module('starter.controllers', [])
                 })
         }
 
+        /* Vide le champ du commentaire */
         $scope.clearCommentInput = function(){
             $scope.comment = '';
         }
@@ -181,6 +193,7 @@ angular.module('starter.controllers', [])
      * REGISTER *
      *****************************************/
     .controller('RegisterCtrl', function($scope, $http, $state, $ionicPopup,$ionicLoading, $ionicViewService) {
+        /* Traitement de la demande de création de compte */
         $scope.doRegister = function(registerData){
             $ionicLoading.show();
 
@@ -226,10 +239,9 @@ angular.module('starter.controllers', [])
      *****************************************/
     .controller('SignInCtrl', function($scope, $http, $state, $ionicPopup,$ionicLoading, $ionicViewService) {
 
+        /* Traitement de la demande d'authentification */
         $scope.doLogin = function(loginData){
             $ionicLoading.show();
-            //console.log("user : " + loginData.login);
-            //console.log("pass : " + loginData.password);
             var user = {
                 login: loginData.login,
                 password : loginData.password
@@ -237,20 +249,14 @@ angular.module('starter.controllers', [])
             $http.post('http://cinebook-project.tk/login', user )
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
-                    //var userInfos = angular.toJson(json);
-                    //console.log("Error : " +json.error);
                     if(json.error == true) {
                         $scope.msgError = json;
-                        /*$scope.showError= function() {
-                            return true;
-                        }*/
                         $ionicPopup.alert({
                             title: 'Erreur d\'authentification',
                             template: json.message
                         });
                         $ionicLoading.hide();
                     }else{
-                        //console.log("Infos = " + angular.toJson(json));
                         window.localStorage['user'] = angular.toJson(user);
                         window.localStorage['userId'] = json.user.id;
                         $ionicViewService.nextViewOptions({
@@ -258,9 +264,6 @@ angular.module('starter.controllers', [])
                             disableBack: true
                         });
                         $state.go('tab.dash');
-                        /*$scope.showError= function() {
-                            return false;
-                        }*/
                         $ionicLoading.hide();
                     }
                 })
@@ -281,21 +284,24 @@ angular.module('starter.controllers', [])
      * FILM DETAILS *
      *****************************************/
     .controller('DetailFilmCtrl', function($scope, $stateParams, $http, $ionicLoading, $ionicViewService, $ionicModal, detailFilm, videoFilm){
+        /* Eviter de revenir à la vue actuelle par le bouton Retour */
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
         });
+
         $ionicLoading.show();
+
+        /* Charger les données du film sélectionné depuis le service detailFilm */
         detailFilm.get($stateParams, function (data) {
             var json = angular.fromJson(data);
-            console.log("json= "+ angular.toJson(data));
             $scope.data= json;
             var i=0;
             var nb_mot=0;
             var littleoverview="";
+            /* N'afficher que 30 mots de la description */
             while(nb_mot<30 && i<data.overview.length)
             {
-
                 if(data.overview[i]==' ')
                 {
                     nb_mot++;
@@ -305,37 +311,37 @@ angular.module('starter.controllers', [])
                 littleoverview+=data.overview[i];
                 i++;
             }
-                littleoverview=littleoverview+" ...";
+            littleoverview=littleoverview+" ...";
             $scope.lo=littleoverview;
-            /************** Genres ****************/
+
+            /* Genres */
             var genres = angular.fromJson(json.genres);
-            console.log(json.genres.length);
             $scope.genres ="";
             for(var i=0; i<json.genres.length; i++){
-                console.log("genre :" + genres[i].name);
                 $scope.genres+= genres[i].name;
 
                 if(i != json.genres.length-1){
                     $scope.genres +=", "
                 }
             }
+
             /************* Date de sortie *******************/
             var releaseDate = angular.fromJson(json).release_date;
             var arrayDate = releaseDate.split('-');
-            //console.log(releaseDate);
             releaseDate = arrayDate[2]+"/"+arrayDate[1]+"/"+arrayDate[0];
             //console.log(releaseDate);
             $scope.release_date = releaseDate;
 
 
         });
+        /******** Bande annonce **********/
         videoFilm.get($stateParams, function (data) {
             var json = angular.fromJson(data);
             $scope.video=angular.fromJson(json.results[0]);
             $ionicLoading.hide();
         });
 
-        // Load the Share dialog from the given template URL
+        // Charger la modal de partage de film
         $ionicModal.fromTemplateUrl('templates/share-modal.html', function(modal) {
             $scope.shareDialog = modal;
         }, {
@@ -344,9 +350,12 @@ angular.module('starter.controllers', [])
             focusFirstInput: true
         });
 
+        /* Afficher la modal de partage */
         $scope.showShareDialog = function(){
             $scope.shareDialog.show();
         };
+
+        /*Fermer la modal de partage*/
         $scope.leaveShareDialog = function() {
             // Remove dialog
             $scope.shareDialog.remove();
@@ -358,11 +367,14 @@ angular.module('starter.controllers', [])
                 animation: 'slide-in-up'
             });
         };
+
+        /* Ouvrir la modal de partage */
         $scope.shareFilm = function(){
             $scope.showShareDialog();
 
         };
 
+        /* Quand l'utilisateur partage un film */
         $scope.onShare = function(){
             var user = angular.fromJson(window.localStorage['user']);
 
@@ -379,7 +391,6 @@ angular.module('starter.controllers', [])
 
             $http.post('http://cinebook-project.tk/posts/add', data )
                 .success(function (data, status, headers, config) {
-                    console.log('Response = ' +data);
                     var json = angular.fromJson(data);
                     if(data.error == false){
                         $scope.leaveShareDialog();
@@ -395,23 +406,25 @@ angular.module('starter.controllers', [])
      * FRIENDS *
      *****************************************/
     .controller('FriendsCtrl', function($scope, $state, $http, $ionicPopup, $ionicModal, $ionicLoading, $ionicViewService, Friendship) {
+        /* Empêcher le retour à la vue "Amis" avec le bouton Retour */
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
         });
 
         $ionicLoading.show();
+
         var user = angular.fromJson(window.localStorage['user']);
-        console.log("user = " +angular.toJson(user));
+
         $scope.userId = window.localStorage['userId'];
 
+        /* Charger les amis depuis le serveur */
         $http.post('http://cinebook-project.tk/friends', user )
             .success(function (data, status, headers, config) {
                 var json = angular.fromJson(data);
                 $scope.friends = json.friends;
 
                 var friendInfos = angular.toJson(json.friends);
-                console.log("friendInfos : " +friendInfos);
 
                 $ionicLoading.hide();
             })
@@ -419,15 +432,16 @@ angular.module('starter.controllers', [])
                 console.log('ERROR');
             });
 
-        //$scope.friends = angular.fromJson(window.localStorage['userInfos']).friends;
         $scope.data = {
             showDelete: false
         };
 
+        /* Mettre le badge du nombre de demandes d'amis */
         Friendship.async().then(function(d) {
             $scope.badge.friend = d;
         });
 
+        /* Raffraîchir la vue "Amis" avec le PullToRefresh */
         $scope.refreshFriends = function(){
             $http.post('http://cinebook-project.tk/friends', user )
                 .success(function (data, status, headers, config) {
@@ -435,7 +449,6 @@ angular.module('starter.controllers', [])
                     $scope.friends = json.friends;
 
                     var friendInfos = angular.toJson(json.friends);
-                    console.log("friendInfos : " +friendInfos);
 
                     $ionicLoading.hide();
                 })
@@ -451,6 +464,7 @@ angular.module('starter.controllers', [])
         }
 
 
+        /* Suppression d'un ami */
         $scope.onFriendDelete = function(friend) {
             console.log("item = " +angular.toJson(friend));
             var confirmPopup = $ionicPopup.confirm({
@@ -479,6 +493,7 @@ angular.module('starter.controllers', [])
             });
         };
 
+        /* Afficher les détails d'un ami */
         $scope.friendDetails = function(id){
             $ionicViewService.nextViewOptions({
                 disableAnimate: false,
@@ -487,7 +502,7 @@ angular.module('starter.controllers', [])
             $state.go('tab.friend-detail',{'friendId': id});
         };
 
-        // Load the add / change dialog from the given template URL
+        /* Charger la modal d'ajout d'ami */
         $ionicModal.fromTemplateUrl('templates/friend-add-modal.html', function(modal) {
             $scope.addDialog = modal;
         }, {
@@ -495,9 +510,12 @@ angular.module('starter.controllers', [])
             animation: 'slide-in-up'
         });
 
+        /* Afficher la modal d'ajout d'ami */
         $scope.showAddDialog = function(){
             $scope.addDialog.show();
         };
+
+        /* Fermer la modal d'ajout d'ami */
         $scope.leaveAddDialog = function() {
             // Remove dialog
             $scope.addDialog.remove();
@@ -510,10 +528,12 @@ angular.module('starter.controllers', [])
             });
         };
 
+        /* Vider le champs de recherche */
         $scope.clearSearch = function() {
             $scope.data.searchQuery = '';
         };
 
+        /* Rechercher un ami */
         $scope.searchFriend = function(query){
             console.log('query = ' +query);
             var user = angular.fromJson(window.localStorage['user']);
@@ -528,6 +548,7 @@ angular.module('starter.controllers', [])
                 });
         }
 
+        /* Ajouter un ami */
         $scope.addFriend = function(friendId){
             console.log(friendId);
             $http.post('http://cinebook-project.tk/friend/add/'+friendId, user )
@@ -542,6 +563,7 @@ angular.module('starter.controllers', [])
                 });
         }
 
+        /* Traiter une demande d'ajout d'ami */
         $scope.friendshipDeal = function(friend){
             var confirmPopup = $ionicPopup.confirm({
                 title: friend.first_name +' '+ friend.last_name,
@@ -581,8 +603,6 @@ angular.module('starter.controllers', [])
                 });
             });
         }
-
-
     })
 
 
@@ -590,12 +610,17 @@ angular.module('starter.controllers', [])
      * FRIEND DETAILS *
      *****************************************/
     .controller('FriendDetailCtrl', function($scope, $stateParams, $http, $ionicLoading, $ionicViewService) {
+        /* Empêcher le retour à la vue "DétailsFriend" avec le bouton Retour */
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
         });
+
         $ionicLoading.show();
+
         var user = angular.fromJson(window.localStorage['user']);
+
+        /* Charger les détails d'un ami depuis le serveur */
         $http.post('http://cinebook-project.tk/friend/'+$stateParams.friendId, user )
             .success(function (data, status, headers, config) {
                 var json = angular.fromJson(data);
@@ -620,6 +645,7 @@ angular.module('starter.controllers', [])
      * PARAMETERS *
      *****************************************/
     .controller('ParamsCtrl', function($scope, $state, $ionicViewService, $http, $ionicPopup, Camera) {
+        /* Empêcher le retour à la vur Paramètres avec le bouton Retour */
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
@@ -637,31 +663,17 @@ angular.module('starter.controllers', [])
         })*/
 
 
+        /* Déconnexion */
         $scope.logout = function(){
             window.localStorage.clear();
             $state.go('signin');
         };
 
-
-
-        $scope.getImageFromLibrary = function() {
-            console.log('Getting camera');
-            navigator.camera.getPicture(function(imageURI){
-                    $scope.lastPhoto =  imageURI;
-                }, function(message) {
-                    alert('get picture failed');
-                },{
-                    quality: 50,
-                    destinationType: navigator.camera.DestinationType.FILE_URI,
-                    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
-                }
-            );
-        }
-
-
         var user = angular.fromJson(window.localStorage['user']);
 
+        /* Changer la photo de profil */
         $scope.changePhoto = function(){
+            /* Message de choix de la Caméra ou la Galerie */
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Changer la photo',
                 template: 'D\'où prendre la photo?',
@@ -672,6 +684,7 @@ angular.module('starter.controllers', [])
             });
             confirmPopup.then(function(res) {
                 if(res) {
+                    /* Chargement depuis la Galerie */
                     navigator.camera.getPicture(function(imageURI){
                             $scope.lastPhoto =  imageURI;
                             var ft = new FileTransfer(),
@@ -706,6 +719,7 @@ angular.module('starter.controllers', [])
                         }
                     );
                 } else {
+                    /* Chargement depuis une prise de photo depuis la Caméra */
                     navigator.camera.getPicture(function(imageURI){
                             $scope.lastPhoto =  imageURI;
                             var ft = new FileTransfer(),
@@ -723,10 +737,10 @@ angular.module('starter.controllers', [])
 
                             ft.upload(imageURI, 'http://cinebook-project.tk/user/uploadPhoto',
                                 function (e) {
-                                    alert('upload ok');
+                                    alert('Changement de photo effectué avec succès');
                                 },
                                 function (e) {
-                                    alert("Upload failed");
+                                    alert("Une erreur est survenue lors du changement de photo");
                                 }, options);
 
                         }, function(message) {
@@ -743,6 +757,7 @@ angular.module('starter.controllers', [])
             });
         }
 
+        /* Supprimer la photo de profil */
         $scope.deletePhoto = function(){
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Supprimer photo de profil',
@@ -760,56 +775,11 @@ angular.module('starter.controllers', [])
                                 });
                         });
                 } else {
-                    console.log('You are not sure');
+                    console.log('Pas de changement');
                 }
             });
         }
-
-        $scope.getImageFromCamera = function() {
-            console.log('Getting camera');
-            navigator.camera.getPicture(function(imageURI){
-                $scope.lastPhoto =  imageURI;
-                var ft = new FileTransfer(),
-                    options = new FileUploadOptions();
-
-                options.fileKey = "photo";
-                options.fileName = 'filename.jpg'; // We will use the name auto-generated by Node at the server side.
-                options.mimeType = "image/jpeg";
-                options.chunkedMode = false;
-                options.params = { // Whatever you populate options.params with, will be available in req.body at the server-side.
-                    "description": "Uploaded from my phone"
-                };
-
-                ft.upload(imageURI, 'http://cinebook-project.tk/user/uploadPhoto',
-                    function (e) {
-                        alert('upload ok');
-                    },
-                    function (e) {
-                        alert("Upload failed");
-                    }, options);
-
-                }, function(message) {
-                    alert('get picture failed');
-                },{
-                    quality: 50,
-                    destinationType: navigator.camera.DestinationType.FILE_URI,
-                    sourceType: navigator.camera.PictureSourceType.CAMERA
-                }
-            );
-        }
     })
-
-
-    /*****************************************
-     * SEARCH *
-     *****************************************/
-    /*.controller('SearchCtrl', function($scope,$ionicViewService) {
-        $ionicViewService.nextViewOptions({
-            disableAnimate: true,
-            disableBack: true
-        });
-    })*/
-
 
     /*****************************************
      * CINEMA *
@@ -819,11 +789,11 @@ angular.module('starter.controllers', [])
         var result;
         var overviews = new Array();
 
+        /* Charger la liste des films de la catégorie "Aminés" (16) à l'aide du service Films */
         Films.get({id:16}, function(data) {
             var json = angular.fromJson(data);
 
             result = angular.fromJson(json.results);
-
 
             for (var i = 0; i < result.length; i++) {
                 console.log(result[i].id);
@@ -833,10 +803,7 @@ angular.module('starter.controllers', [])
                     console.log("json= " + angular.toJson(data));
                     overviews.push(json);
                 });
-
             }
-
-
             $scope.overviews = overviews;
         });
 
@@ -844,6 +811,7 @@ angular.module('starter.controllers', [])
             $scope.page = 1;
         }, 1000);
 
+        /* Charger plus de films quand l'utilisateur arrive à la fin de la page */
         $scope.loadMore = function() {
             $timeout(function() {
                 $scope.page += 1;
@@ -869,9 +837,6 @@ angular.module('starter.controllers', [])
             //$scope.loadMore();
             console.log("done");
         });
-
-
-
     });
 
 
