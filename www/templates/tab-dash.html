@@ -28,7 +28,7 @@
 
           <div ng-repeat="actu in userInfos.posts" class="list card actu-container">
               <div class="item item-avatar" style="border-bottom: 0;border-radius: 15px 15px 0 0;">
-                  <img src="img/avatar.jpg">
+                  <img src="http://cinebook-project.tk/images/{{actu.user_id}}.jpg">
                   <h2 class="actu-h2"><strong>{{actu.first_name}} {{actu.last_name}}</strong> a partagé ceci:</h2>
                   <p style="font-size: 0.6em;">{{actu.created_at}}</p>
               </div>

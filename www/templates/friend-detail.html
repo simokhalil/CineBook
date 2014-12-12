@@ -21,10 +21,10 @@
 
             <table style="text-align: center; margin: 10px; width: 100%; font-family: 'Lato' sans-serif; color: #898989">
                 <tr>
-                    <td width="25%"><img src="img/avatar.jpg" style="max-width: 100%; float:left; margin: 0 10px 0 0; border-radius: 100%"></td>
-                    <td width="25%" style="vertical-align: middle"><span style="font-size: 4em">0</span><br>J'aime</td>
-                    <td width="25%" style="vertical-align: middle"><span style="font-size: 4em">0</span><br>Partages</td>
-                    <td width="25%" style="vertical-align: middle"><span style="font-size: 4em">0</span><br>Amis</td>
+                    <td width="25%"><img src="http://cinebook-project.tk/images/{{friend.id}}.jpg"  style="max-width: 100%; float:left; margin: 0 10px 0 0; border-radius: 100%"></td>
+                    <td width="25%" style="vertical-align: middle"><span style="font-size: 4em">{{friend.nbLikes}}</span><br>J'aime</td>
+                    <td width="25%" style="vertical-align: middle"><span style="font-size: 4em">{{friend.nbPosts}}</span><br>Partages</td>
+                    <td width="25%" style="vertical-align: middle"><span style="font-size: 4em">{{friend.nbFriends}}</span><br>Amis</td>
                 </tr>
             </table>
         </div>
@@ -44,7 +44,7 @@
 
         <div ng-repeat="actu in actus" class="list card" style="margin-top: 20px;">
             <div class="item item-avatar">
-                <img src="img/avatar.jpg">
+                <img src="http://cinebook-project.tk/images/{{actu.user_id}}.jpg">
                 <h2 class="actu-h2">{{actu.first_name}} {{actu.last_name}}</h2>
                 <p style="font-size: 0.6em;">{{actu.created_at}}</p>
             </div>

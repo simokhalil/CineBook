@@ -11,8 +11,13 @@
             <span style="display: block; color:#000000; font-size: 3em; margin:10px 0 60px 0; font-weight: 300;">{{user.first_name}} {{user.last_name}}</span>
         </p>
 
-            <button class="button button-block button-assertive" style="border-radius: 25px;" ng-click="logout()"><i class="icon ion-power" style="margin-right: 15px;"></i> Se déconnecter</button>
+        <button class="button button-block button-assertive" style="border-radius: 25px;" ng-click="logout()"><i class="icon ion-power" style="margin-right: 15px;"></i> Se déconnecter</button>
 
-            <button ng-click="getImage()">Photo</button>
+        <div style="text-align: center; margin:15px auto 0 auto;">
+            <img ng-src="{{lastPhoto}}" id="photoProfil" style="display:block;max-width: 100%;margin:auto;">
+            <button class="button button-positive" ng-click="changePhoto()">Modifier la photo</button>
+            <button class="button button-assertive" ng-click="deletePhoto()">Supprimer la photo</button>
+        </div>
+
     </ion-content>
 </ion-view>

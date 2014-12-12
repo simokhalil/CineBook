@@ -30,7 +30,7 @@ angular.module('starter.services', ['ngResource'])
                     async: function(){
                         var user = angular.fromJson(window.localStorage['user']);
 
-                        var promise = $http.post('http://eimk.tk/cinebook/public/friends/check', user )
+                        var promise = $http.post('http://cinebook-project.tk/friends/check', user )
                             .success(function (data, status, headers, config) {
                                 console.log('json = ' +angular.toJson(data));
                             })
@@ -113,7 +113,7 @@ angular.module('starter.services', ['ngResource'])
         }
     })
 
-    .factory('Cam', ['$q', function($q) {
+    .factory('Camera', ['$q', function($q) {
 
         return {
             getPicture: function (options) {

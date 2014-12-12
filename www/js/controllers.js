@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
         $ionicLoading.show();
         var user = angular.fromJson(window.localStorage['user']);
 
-        $http.post('http://eimk.tk/cinebook/public/userInfos', user )
+        $http.post('http://cinebook-project.tk/userInfos', user )
             .success(function (data, status, headers, config) {
                 var json = angular.fromJson(data);
                 var userInfos = angular.toJson(json);
@@ -60,7 +60,7 @@ angular.module('starter.controllers', [])
 
 
         $scope.refreshActus = function(){
-            $http.post('http://eimk.tk/cinebook/public/userInfos', user )
+            $http.post('http://cinebook-project.tk/userInfos', user )
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     var userInfos = angular.toJson(json);
@@ -82,7 +82,7 @@ angular.module('starter.controllers', [])
 
         $scope.like = function(actu){
             if(actu.can_like==true) {
-                $http.post('http://eimk.tk/cinebook/public/post/like/' + actu.id, user)
+                $http.post('http://cinebook-project.tk/post/like/' + actu.id, user)
                     .success(function (data, status, headers, config) {
                         var json = angular.fromJson(data);
 
@@ -113,7 +113,7 @@ angular.module('starter.controllers', [])
         $scope.showComments = function(actu){
             $scope.commentModal.show();
             $ionicLoading.show();
-            $http.post('http://eimk.tk/cinebook/public/post/' + actu.id+'/comments', user)
+            $http.post('http://cinebook-project.tk/post/' + actu.id+'/comments', user)
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     $scope.comments = json.comments_list;
@@ -140,7 +140,7 @@ angular.module('starter.controllers', [])
 
         $scope.refreshComments = function(actu){
             $ionicLoading.show();
-            $http.post('http://eimk.tk/cinebook/public/post/' + actu.id+'/comments', user)
+            $http.post('http://cinebook-project.tk/post/' + actu.id+'/comments', user)
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     $scope.comments = json.comments_list;
@@ -157,7 +157,7 @@ angular.module('starter.controllers', [])
             var data = user;
             data.comment = comment;
             data.post_id = actu.id;
-            $http.post('http://eimk.tk/cinebook/public/post/' + actu.id+'/comments/add', data)
+            $http.post('http://cinebook-project.tk/post/' + actu.id+'/comments/add', data)
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     if(json.error == false) {
@@ -177,6 +177,49 @@ angular.module('starter.controllers', [])
         }
     })
 
+    /*****************************************
+     * REGISTER *
+     *****************************************/
+    .controller('RegisterCtrl', function($scope, $http, $state, $ionicPopup,$ionicLoading, $ionicViewService) {
+        $scope.doRegister = function(registerData){
+            $ionicLoading.show();
+
+            /* Récupération des données de l'utilisateur */
+            var user = {
+                nom: registerData.nom,
+                prenom: registerData.prenom,
+                email: registerData.email,
+                password : registerData.password
+            };
+
+            /* Envoi de la requête d'enregistrement au serveur (en POST) */
+            $http.post('http://cinebook-project.tk/register', user )
+                .success(function(data, status, headers, config){
+                    var json = angular.fromJson(data);
+                    if(json.error == true) {
+                        $ionicPopup.alert({
+                            title: 'Création de compte',
+                            template: 'Un problème est survenu, réessayez plus tard'
+                        });
+                        $ionicLoading.hide();
+                    }
+                    else {
+                        var alert = $ionicPopup.alert({
+                            title: 'Création de compte',
+                            template: 'Compte créé avec succès. Cliquer sur OK pour se connecter'
+                        }).then(function () {
+                            $state.go('signin');
+                        });
+                        $ionicLoading.hide();
+                    }
+                })
+        }
+
+        /* Aller à la vue Login */
+        $scope.goToSignin = function () {
+            $state.go('signin');
+        }
+    })
 
     /*****************************************
      * LOGIN *
@@ -191,7 +234,7 @@ angular.module('starter.controllers', [])
                 login: loginData.login,
                 password : loginData.password
             };
-            $http.post('http://eimk.tk/cinebook/public/login', user )
+            $http.post('http://cinebook-project.tk/login', user )
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     //var userInfos = angular.toJson(json);
@@ -226,6 +269,11 @@ angular.module('starter.controllers', [])
                 });
 
         };
+
+        /* Aller à la vue Register */
+        $scope.goToRegister = function () {
+            $state.go('register');
+        }
     })
 
 
@@ -329,7 +377,7 @@ angular.module('starter.controllers', [])
             data.title = title;
             data.content = content;
 
-            $http.post('http://eimk.tk/cinebook/public/posts/add', data )
+            $http.post('http://cinebook-project.tk/posts/add', data )
                 .success(function (data, status, headers, config) {
                     console.log('Response = ' +data);
                     var json = angular.fromJson(data);
@@ -357,7 +405,7 @@ angular.module('starter.controllers', [])
         console.log("user = " +angular.toJson(user));
         $scope.userId = window.localStorage['userId'];
 
-        $http.post('http://eimk.tk/cinebook/public/friends', user )
+        $http.post('http://cinebook-project.tk/friends', user )
             .success(function (data, status, headers, config) {
                 var json = angular.fromJson(data);
                 $scope.friends = json.friends;
@@ -381,7 +429,7 @@ angular.module('starter.controllers', [])
         });
 
         $scope.refreshFriends = function(){
-            $http.post('http://eimk.tk/cinebook/public/friends', user )
+            $http.post('http://cinebook-project.tk/friends', user )
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     $scope.friends = json.friends;
@@ -416,7 +464,7 @@ angular.module('starter.controllers', [])
                 if(res) {
                     console.log('Yes, tu es sûr');
                     $ionicLoading.show();
-                    $http.post('http://eimk.tk/cinebook/public/friend/delete/'+friend.id, user )
+                    $http.post('http://cinebook-project.tk/friend/delete/'+friend.id, user )
                         .success(function (data, status, headers, config) {
 
                             $ionicLoading.hide();
@@ -469,7 +517,7 @@ angular.module('starter.controllers', [])
         $scope.searchFriend = function(query){
             console.log('query = ' +query);
             var user = angular.fromJson(window.localStorage['user']);
-            $http.post('http://eimk.tk/cinebook/public/friend/search/'+query, user )
+            $http.post('http://cinebook-project.tk/friend/search/'+query, user )
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     console.log("search = " + angular.toJson(data));
@@ -482,7 +530,7 @@ angular.module('starter.controllers', [])
 
         $scope.addFriend = function(friendId){
             console.log(friendId);
-            $http.post('http://eimk.tk/cinebook/public/friend/add/'+friendId, user )
+            $http.post('http://cinebook-project.tk/friend/add/'+friendId, user )
                 .success(function (data, status, headers, config) {
                     var json = angular.fromJson(data);
                     console.log("search = " + angular.toJson(data));
@@ -506,7 +554,7 @@ angular.module('starter.controllers', [])
             confirmPopup.then(function(res) {
                 if(res) {
                     $ionicLoading.show();
-                    $http.post('http://eimk.tk/cinebook/public/friend/confirm/'+friend.id, user )
+                    $http.post('http://cinebook-project.tk/friend/confirm/'+friend.id, user )
                         .success(function (data, status, headers, config) {
 
                             $ionicLoading.hide();
@@ -516,7 +564,7 @@ angular.module('starter.controllers', [])
                             console.log('ERROR');
                         });
                 } else {
-                    $http.post('http://eimk.tk/cinebook/public/friend/decline/'+friend.id, user )
+                    $http.post('http://cinebook-project.tk/friend/decline/'+friend.id, user )
                         .success(function (data, status, headers, config) {
 
                             $ionicLoading.hide();
@@ -548,7 +596,7 @@ angular.module('starter.controllers', [])
         });
         $ionicLoading.show();
         var user = angular.fromJson(window.localStorage['user']);
-        $http.post('http://eimk.tk/cinebook/public/friend/'+$stateParams.friendId, user )
+        $http.post('http://cinebook-project.tk/friend/'+$stateParams.friendId, user )
             .success(function (data, status, headers, config) {
                 var json = angular.fromJson(data);
                 $scope.friend = json.user;
@@ -571,29 +619,183 @@ angular.module('starter.controllers', [])
     /*****************************************
      * PARAMETERS *
      *****************************************/
-    .controller('ParamsCtrl', function($scope, $state, $ionicViewService, Cam) {
+    .controller('ParamsCtrl', function($scope, $state, $ionicViewService, $http, $ionicPopup, Camera) {
         $ionicViewService.nextViewOptions({
             disableAnimate: true,
             disableBack: true
         });
 
         $scope.user = angular.fromJson(window.localStorage['userInfos']).user;
+
+        $scope.lastPhoto = "http://cinebook-project.tk/images/"+$scope.user.id+".jpg";
+
+        /*$http.get("http://cinebook-project.tk/images/"+$scope.user.id+".jpg").then(function(resp) {
+            $scope.lastPhoto = "http://cinebook-project.tk/images/"+$scope.user.id+".jpg";
+            // For JSON responses, resp.data contains the result
+        }, function(err) {
+            $scope.lastPhoto = "../img/avatar.jpg"
+        })*/
+
+
         $scope.logout = function(){
             window.localStorage.clear();
             $state.go('signin');
         };
 
 
-        $scope.getImage = function() {
+
+        $scope.getImageFromLibrary = function() {
             console.log('Getting camera');
-            Cam.getPicture().then(function(imageURI) {
-                console.log(imageURI);
-                $scope.lastPhoto = imageURI;
-            }, function(err) {
-                console.err(err);
-            }, {
-                sourceType : navigator.camera.PictureSourceType.PHOTOLIBRARY
+            navigator.camera.getPicture(function(imageURI){
+                    $scope.lastPhoto =  imageURI;
+                }, function(message) {
+                    alert('get picture failed');
+                },{
+                    quality: 50,
+                    destinationType: navigator.camera.DestinationType.FILE_URI,
+                    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                }
+            );
+        }
+
+
+        var user = angular.fromJson(window.localStorage['user']);
+
+        $scope.changePhoto = function(){
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Changer la photo',
+                template: 'D\'où prendre la photo?',
+                cancelText: 'Caméra', // String (default: 'Cancel'). The text of the Cancel button.
+                cancelType: 'button-default', // String (default: 'button-default'). The type of the Cancel button.
+                okText: 'Galerie', // String (default: 'OK'). The text of the OK button.
+                okType: 'button-positive'
             });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    navigator.camera.getPicture(function(imageURI){
+                            $scope.lastPhoto =  imageURI;
+                            var ft = new FileTransfer(),
+                                options = new FileUploadOptions();
+
+                            options.fileKey = "photo";
+                            options.fileName = 'filename.jpg'; // We will use the name auto-generated by Node at the server side.
+                            options.mimeType = "image/jpeg";
+                            options.chunkedMode = false;
+                            options.params = { // Whatever you populate options.params with, will be available in req.body at the server-side.
+                                "description": "Uploaded from my phone",
+                                "login": user.login,
+                                "password": user.password
+                            };
+
+                            ft.upload(imageURI, 'http://cinebook-project.tk/user/uploadPhoto',
+                                function (e) {
+                                    alert('upload ok');
+                                },
+                                function (e) {
+                                    alert("Upload failed");
+                                    console.log("upload error source " + e);
+                                }, options);
+                        }, function(message) {
+                            alert('get picture failed');
+                        },{
+                            quality: 50,
+                            targetWidth: 128,
+                            targetHeight: 128,
+                            destinationType: navigator.camera.DestinationType.FILE_URI,
+                            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                        }
+                    );
+                } else {
+                    navigator.camera.getPicture(function(imageURI){
+                            $scope.lastPhoto =  imageURI;
+                            var ft = new FileTransfer(),
+                                options = new FileUploadOptions();
+
+                            options.fileKey = "photo";
+                            options.fileName = 'filename.jpg'; // We will use the name auto-generated by Node at the server side.
+                            options.mimeType = "image/jpeg";
+                            options.chunkedMode = false;
+                            options.params = { // Whatever you populate options.params with, will be available in req.body at the server-side.
+                                "description": "Uploaded from my phone",
+                                "login": user.login,
+                                "password": user.password
+                            };
+
+                            ft.upload(imageURI, 'http://cinebook-project.tk/user/uploadPhoto',
+                                function (e) {
+                                    alert('upload ok');
+                                },
+                                function (e) {
+                                    alert("Upload failed");
+                                }, options);
+
+                        }, function(message) {
+                            alert('get picture failed');
+                        },{
+                            quality: 50,
+                            targetWidth: 128,
+                            targetHeight: 128,
+                            destinationType: navigator.camera.DestinationType.FILE_URI,
+                            sourceType: navigator.camera.PictureSourceType.CAMERA
+                        }
+                    );
+                }
+            });
+        }
+
+        $scope.deletePhoto = function(){
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Supprimer photo de profil',
+                template: 'Supprimer la photo de profil ?',
+                cancelText: 'Non',
+                okText: 'Oui'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    $http.post('http://cinebook-project.tk/user/deletePhoto', user)
+                        .success(function(data, status, header, config){
+                            $http.get("http://cinebook-project.tk/images/"+$scope.user.id+".jpg")
+                                .success(function(data, status, header, config){
+                                    $scope.lastPhoto = data.src;
+                                });
+                        });
+                } else {
+                    console.log('You are not sure');
+                }
+            });
+        }
+
+        $scope.getImageFromCamera = function() {
+            console.log('Getting camera');
+            navigator.camera.getPicture(function(imageURI){
+                $scope.lastPhoto =  imageURI;
+                var ft = new FileTransfer(),
+                    options = new FileUploadOptions();
+
+                options.fileKey = "photo";
+                options.fileName = 'filename.jpg'; // We will use the name auto-generated by Node at the server side.
+                options.mimeType = "image/jpeg";
+                options.chunkedMode = false;
+                options.params = { // Whatever you populate options.params with, will be available in req.body at the server-side.
+                    "description": "Uploaded from my phone"
+                };
+
+                ft.upload(imageURI, 'http://cinebook-project.tk/user/uploadPhoto',
+                    function (e) {
+                        alert('upload ok');
+                    },
+                    function (e) {
+                        alert("Upload failed");
+                    }, options);
+
+                }, function(message) {
+                    alert('get picture failed');
+                },{
+                    quality: 50,
+                    destinationType: navigator.camera.DestinationType.FILE_URI,
+                    sourceType: navigator.camera.PictureSourceType.CAMERA
+                }
+            );
         }
     })
 

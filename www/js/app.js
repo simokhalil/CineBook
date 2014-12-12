@@ -7,6 +7,11 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.directives'])
 
+    /* Ajout des images à la Whitelist d'Angular afin de pouvoir afficher les lins de type file:// */
+    .config(function($compileProvider){
+        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|content):/);
+    })
+
     .run(function ($ionicPlatform, $state) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -36,10 +41,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         // Each state's controller can be found in controllers.js
         $stateProvider
 
+            /* Vue de login */
             .state('signin', {
                 url: '/sign-in',
                 templateUrl: 'templates/login.html',
                 controller: 'SignInCtrl'
+            })
+
+
+            /* Vue de création de compte */
+            .state('register', {
+                url: '/register',
+                templateUrl: 'templates/register.html',
+                controller: 'RegisterCtrl'
             })
 
 
