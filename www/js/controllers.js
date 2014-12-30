@@ -16,7 +16,13 @@ angular.module('starter.controllers', [])
     /*****************************************
      * DASH *
      *****************************************/
-    .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, $ionicModal,ScrollFix, Films, FilmsDisney) {
+    .controller('DashCtrl', function($scope, $http, $state, $ionicLoading, $ionicModal, $ionicViewService, ScrollFix, Films, FilmsDisney) {
+        /* Eviter de revenir à la vue actuelle par le bouton Retour */
+        $ionicViewService.nextViewOptions({
+            disableAnimate: true,
+            disableBack: true
+        });
+
         /* Service permettant le scroll vertical sur un scroll horizontal (liste des films dans le Dashboard)*/
         ScrollFix.fix();
 
@@ -195,6 +201,12 @@ angular.module('starter.controllers', [])
      * REGISTER *
      *****************************************/
     .controller('RegisterCtrl', function($scope, $http, $state, $ionicPopup,$ionicLoading, $ionicViewService) {
+        /* Eviter de revenir à la vue actuelle par le bouton Retour */
+        $ionicViewService.nextViewOptions({
+            disableAnimate: true,
+            disableBack: true
+        });
+
         /* Traitement de la demande de création de compte */
         $scope.doRegister = function(registerData){
             $ionicLoading.show();
@@ -240,6 +252,12 @@ angular.module('starter.controllers', [])
      * LOGIN *
      *****************************************/
     .controller('SignInCtrl', function($scope, $http, $state, $ionicPopup,$ionicLoading, $ionicViewService) {
+
+        /* Eviter de revenir à la vue actuelle par le bouton Retour */
+        $ionicViewService.nextViewOptions({
+            disableAnimate: true,
+            disableBack: true
+        });
 
         /* Traitement de la demande d'authentification */
         $scope.doLogin = function(loginData){

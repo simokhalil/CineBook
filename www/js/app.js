@@ -25,8 +25,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
 
             var user = angular.fromJson(window.localStorage['user']);
-            if (!user) {
-                $state.go('signin');
+            if (user != null) {
+                $state.go('tab.dash');
             }
         });
     })
@@ -139,7 +139,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/dash');
+        $urlRouterProvider.otherwise('/sign-in');
 
     });
 

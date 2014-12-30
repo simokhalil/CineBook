@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.example752590" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>CinéBook</name>
+<widget id="fr.ensim.cinebook" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>CineBook</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Le 1er Réseau social pour enfant basé sur l'actualité Cinéma.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="simokhalil@gmail.com" href="http://www.simosoft.fr/">
+      Khalil EL ISMAILI - Aymerick LEMAGOROU - Tarik FERDAOUSSI
     </author>
   <content src="index.html"/>
   <access origin="*"/>
